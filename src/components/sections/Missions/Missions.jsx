@@ -1,0 +1,139 @@
+import { motion } from 'motion/react'
+
+const missions = [
+  {
+    id: 'm1',
+    name: 'Voyager 1',
+    status: 'Interstellar',
+    title: 'Interstellar Messenger',
+    description: 'First man-made object to reach interstellar space, currently 14.1 billion miles from Earth station.',
+    progress: 100,
+    progressLabel: 'Max Dist',
+    year: '1977',
+    agency: 'NASA',
+  },
+  {
+    id: 'm2',
+    name: 'Chandrayaan-3',
+    status: 'Deployment',
+    title: "Moon's South Pole",
+    description: 'Historical landing near the Lunar South Pole exploring water ice resources for future colonization.',
+    progress: 85,
+    progressLabel: '85% Compl.',
+    year: '2023',
+    agency: 'ISRO',
+  },
+  {
+    id: 'm3',
+    name: 'Apollo 11',
+    status: 'Completed',
+    title: 'First Lunar Landing',
+    description: 'The first crewed mission to land on the Moon, marking a giant leap for mankind.',
+    progress: 100,
+    progressLabel: 'Completed',
+    year: '1969',
+    agency: 'NASA',
+  },
+  {
+    id: 'm4',
+    name: 'Hubble Telescope',
+    status: 'Active',
+    title: 'Cosmic Eye',
+    description: 'Revolutionary space telescope that has transformed our understanding of the universe.',
+    progress: 95,
+    progressLabel: '95% Operational',
+    year: '1990',
+    agency: 'NASA/ESA',
+  },
+  {
+    id: 'm5',
+    name: 'Mars Rover',
+    status: 'Active',
+    title: 'Red Planet Explorer',
+    description: 'Advanced robotic rover searching for signs of ancient microbial life on Mars.',
+    progress: 70,
+    progressLabel: '70% Mission',
+    year: '2021',
+    agency: 'NASA',
+  },
+  {
+    id: 'm6',
+    name: 'Artemis',
+    status: 'In Progress',
+    title: 'Return to the Moon',
+    description: 'NASA program to return humans to the Moon and establish a sustainable presence.',
+    progress: 45,
+    progressLabel: '45% Phase',
+    year: '2025',
+    agency: 'NASA',
+  },
+]
+
+export function Missions({ onSelect }) {
+  return (
+    <section id="missions" className="py-24">
+      <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center justify-between mb-12 border-b border-outline pb-4"
+        >
+          <h2 className="font-headline text-3xl font-light">
+            Mission <span className="font-bold">Protocol</span>
+          </h2>
+          <span className="text-[10px] font-mono opacity-40">Status: Active</span>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {missions.map((mission, index) => (
+            <motion.div
+              key={mission.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              onClick={() => onSelect(mission)}
+              className="border border-outline p-8 group hover:border-primary transition-colors cursor-pointer"
+            >
+              <div className="flex justify-between items-start mb-6">
+                <div className="px-2 py-1 bg-surface-bright text-primary text-[9px] font-bold uppercase tracking-widest border border-primary/20">
+                  {mission.name}
+                </div>
+                <span className="text-[9px] font-mono opacity-30">
+                  Status: {mission.status}
+                </span>
+              </div>
+              <h4 className="font-headline text-xl mb-4">{mission.title}</h4>
+              <p className="text-sm text-on-surface-variant font-light leading-relaxed mb-6">
+                {mission.description}
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="flex-grow bg-outline h-[2px]">
+                  <div
+                    className="bg-primary h-full transition-all duration-1000"
+                    style={{
+                      width: `${mission.progress}%`,
+                      boxShadow:
+                        mission.progress === 100
+                          ? '0 0 10px rgba(135,129,255,0.5)'
+                          : 'none',
+                    }}
+                  />
+                </div>
+                <span className="text-[10px] font-mono opacity-50 uppercase">
+                  {mission.progressLabel}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

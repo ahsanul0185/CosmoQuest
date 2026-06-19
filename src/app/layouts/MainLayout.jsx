@@ -1,51 +1,72 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
 
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'Planets', to: '/#planets' },
+  { label: 'Astronauts', to: '/#astronauts' },
+  { label: 'Missions', to: '/#missions' },
+  { label: 'Galaxies', to: '/#galaxies' },
+  { label: 'Facts', to: '/#facts' },
+]
+
 export function MainLayout() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen bg-background text-on-surface font-body">
       <motion.header
-        initial={{ opacity: 0, y: -10 }}
+        initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="border-b"
-        style={{ borderColor: 'var(--border)' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 glass border-b border-outline/50"
       >
-        <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <NavLink to="/" className="text-xl font-semibold" style={{ color: 'var(--text-h)' }}>
-            CosmoQuest
+        <nav className="max-w-[1200px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+          <NavLink
+            to="/"
+            className="font-headline font-bold text-lg tracking-tighter uppercase text-star-white"
+          >
+            Cosmo<span className="text-primary">Quest</span>
           </NavLink>
-          <ul className="flex gap-6">
-            <li>
+
+          <div className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
               <NavLink
-                to="/"
+                key={item.label}
+                to={item.to}
                 className={({ isActive }) =>
-                  `transition-colors ${isActive ? 'font-medium' : ''}`
+                  `text-sm font-medium transition-colors duration-300 ${
+                    isActive ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'
+                  }`
                 }
-                style={({ isActive }) => ({
-                  color: isActive ? 'var(--accent)' : 'var(--text)',
-                })}
               >
-                Home
+                {item.label}
               </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  `transition-colors ${isActive ? 'font-medium' : ''}`
-                }
-                style={({ isActive }) => ({
-                  color: isActive ? 'var(--accent)' : 'var(--text)',
-                })}
-              >
-                About
-              </NavLink>
-            </li>
-          </ul>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Search"
+            className="text-on-surface-variant hover:text-primary transition-colors"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
         </nav>
       </motion.header>
 
-      <main className="flex-1">
+      <main className="pt-0">
         <Outlet />
       </main>
     </div>
