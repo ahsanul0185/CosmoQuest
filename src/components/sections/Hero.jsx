@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import { motion } from 'motion/react'
+import gsap from 'gsap'
 import { StarsBackground } from '../ui/star'
 import planetIcon from '../../assets/planet-svgrepo-com.svg'
 import astronautIcon from '../../assets/user-astronaut-svgrepo-com.svg'
@@ -15,40 +15,48 @@ const categories = [
   { name: 'Facts', count: '8+ Facts', icon: 'fact' },
 ]
 
-// Real photos from Unsplash, free license
-const HERO_BG =
-  '../assets/images/hero.png' // NASA — Clown-faced Nebula (Hubble)
-const SATURN_IMG =
-  'https://images.unsplash.com/photo-1707056789925-9daccd5eb108?auto=format&fit=crop&w=1200&q=80' // NASA Hubble — Saturn
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-}
-
 export function Hero() {
   const sectionRef = useRef(null)
+  const contentRef = useRef(null)
+  const cardsRef = useRef(null)
   const [animPaused, setAnimPaused] = useState(false)
 
+  // Pause star animation when hero is off-screen
   useEffect(() => {
     const el = sectionRef.current
     if (!el) return
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Pause when the hero is fully out of view, resume when it re-enters
-        setAnimPaused(!entry.isIntersecting)
-      },
-      { threshold: 0 }, // fires as soon as even 1px is visible / hidden
+      ([entry]) => setAnimPaused(!entry.isIntersecting),
+      { threshold: 0 },
     )
-
     observer.observe(el)
     return () => observer.disconnect()
+  }, [])
+
+  // GSAP entrance animations
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Set initial state via GSAP — no inline style conflict
+      gsap.set(contentRef.current, { opacity: 0, y: 50, scale: 0.95, transformOrigin: 'center bottom', willChange: 'transform, opacity' })
+      gsap.set(cardsRef.current.children, { opacity: 0, y: 40, scale: 0.96, transformOrigin: 'center bottom', willChange: 'transform, opacity' })
+
+      const tl = gsap.timeline({ delay: 0.05 })
+
+      tl.to(contentRef.current, {
+        opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
+        clearProps: 'willChange',
+      })
+      tl.to(
+        cardsRef.current.children,
+        {
+          opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.08,
+          ease: 'power3.out', clearProps: 'willChange',
+        },
+        '-=0.5',
+      )
+    }, sectionRef)
+
+    return () => ctx.revert()
   }, [])
 
   return (
@@ -57,44 +65,41 @@ export function Hero() {
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-10 w-full pt-32 pb-16 flex flex-col items-center text-center">
-        <motion.div className="max-w-3xl flex flex-col items-center" initial="hidden" animate="visible" variants={stagger}>
-          <motion.div variants={fadeUp} className="mb-6">
+        <div
+          ref={contentRef}
+          className="max-w-3xl flex flex-col items-center"
+        >
+          <div className="mb-6">
             <span className="inline-block px-4 py-1.5 rounded-full bg-surface/40 border border-outline/50 backdrop-blur-sm text-[10px] font-medium uppercase tracking-[0.3em] text-primary font-body">
               Exploration Interface v4.0
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            variants={fadeUp}
-            className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-6 flex flex-col items-center"
-          >
+          <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-6 flex flex-col items-center">
             <span className="block text-star-white mb-2 text-glow-subtle">WELCOME TO</span>
             <span className="block bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent text-glow pb-2">
               COSMOQUEST
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p variants={fadeUp} className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl">
+          <p className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl">
             Explore the Universe. Discover the Unknown.
-          </motion.p>
+          </p>
 
-          <motion.p
-            variants={fadeUp}
-            className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10"
-          >
+          <p className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10">
             Dive into the wonders of space. Explore planets, meet legendary astronauts,
             discover epic missions, and learn amazing facts about the cosmos.
-          </motion.p>
+          </p>
 
-          <motion.div variants={fadeUp}>
+          <div>
             <a
               href="#categories"
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:bg-primary-dim transition-all duration-300 accent-glow-strong hover:scale-105 active:scale-95"
             >
               Start Exploring
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom fade */}
@@ -111,11 +116,11 @@ export function Hero() {
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-outline to-transparent" />
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div ref={cardsRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {categories.map((category) => (
               <div
                 key={category.name}
-                className="group cursor-pointer rounded-xl border border-outline bg-surface/60 backdrop-blur-sm p-5 hover:border-primary hover:bg-surface-bright/80 transition-all duration-300"
+                className="group cursor-pointer rounded-xl border border-outline bg-surface/60 backdrop-blur-sm p-5 hover:border-primary hover:bg-surface-bright/80 transition-[border-color,background-color] duration-300"
               >
                 <div className="mb-4 flex items-center justify-center">
                   <CategoryIcon name={category.icon} />
@@ -132,34 +137,6 @@ export function Hero() {
         </div>
       </div>
     </section>
-  )
-}
-
-function StarField() {
-  const stars = Array.from({ length: 80 }, (_, i) => ({
-    id: i,
-    left: `${(i * 13.7) % 100}%`,
-    top: `${(i * 7.3) % 100}%`,
-    size: 1 + (i % 3),
-    delay: (i % 5) * 0.6,
-  }))
-
-  return (
-    <>
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="absolute rounded-full bg-white animate-twinkle"
-          style={{
-            left: star.left,
-            top: star.top,
-            width: star.size,
-            height: star.size,
-            animationDelay: `${star.delay}s`,
-          }}
-        />
-      ))}
-    </>
   )
 }
 
