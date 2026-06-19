@@ -132,7 +132,7 @@ export function Planets({ onSelect }) {
           <h2 className="font-headline text-4xl font-light tracking-tighter">
             Planetary <span className="font-bold">Catalog</span>
           </h2>
-          <p className="text-[10px] font-mono opacity-40 uppercase">
+          <p className="text-[10px] font-mono text-on-surface-variant/60 uppercase">
             Total: 08 Terrestrial &amp; Gaseous
           </p>
         </div>
