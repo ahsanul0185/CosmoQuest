@@ -17,9 +17,18 @@ const categories = [
 
 export function Hero() {
   const sectionRef = useRef(null)
-  const contentRef = useRef(null)
   const cardsRef = useRef(null)
+  const starsRef = useRef(null)
   const [animPaused, setAnimPaused] = useState(false)
+
+  // Individual text element refs
+  const badgeRef = useRef(null)
+  const headlineTopRef = useRef(null)
+  const headlineBottomRef = useRef(null)
+  const taglineRef = useRef(null)
+  const descRef = useRef(null)
+  const ctaRef = useRef(null)
+  const categoryTitleRef = useRef(null)
 
   // Pause star animation when hero is off-screen
   useEffect(() => {
@@ -35,24 +44,53 @@ export function Hero() {
 
   // GSAP entrance animations
   useEffect(() => {
+    const els = [
+      badgeRef.current,
+      headlineTopRef.current,
+      headlineBottomRef.current,
+      taglineRef.current,
+      descRef.current,
+      ctaRef.current,
+    ]
+
     const ctx = gsap.context(() => {
-      // Set initial state via GSAP — no inline style conflict
-      gsap.set(contentRef.current, { opacity: 0, y: 50, scale: 0.95, transformOrigin: 'center bottom', willChange: 'transform, opacity' })
-      gsap.set(cardsRef.current.children, { opacity: 0, y: 40, scale: 0.96, transformOrigin: 'center bottom', willChange: 'transform, opacity' })
+      // Hide all text parts and cards before first paint
+      gsap.set(starsRef.current, { opacity: 0 })
+      gsap.set(els, { opacity: 0, y: 30, willChange: 'transform, opacity' })
+      gsap.set(categoryTitleRef.current, { opacity: 0, y: 20, willChange: 'transform, opacity' })
+      gsap.set(cardsRef.current.children, { opacity: 0, y: 35, willChange: 'transform, opacity' })
 
-      const tl = gsap.timeline({ delay: 0.05 })
+      const tl = gsap.timeline({ delay: 0.1, defaults: { ease: 'power3.out' } })
 
-      tl.to(contentRef.current, {
-        opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
+      // Stars fade in independently — very slow, still going after text finishes
+      gsap.to(starsRef.current, { opacity: 1, duration: 4, ease: 'power1.inOut', delay: 0.1 })
+
+      // Each text element slides in one after another
+      tl.to(els, {
+        opacity: 1,
+        y: 0,
+        duration: 0.65,
+        stagger: 0.12,
         clearProps: 'willChange',
       })
+
+      // Cards stagger in after text finishes
+      tl.to(
+        categoryTitleRef.current,
+        { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out', clearProps: 'willChange' },
+        '-=0.1',
+      )
       tl.to(
         cardsRef.current.children,
         {
-          opacity: 1, y: 0, scale: 1, duration: 0.65, stagger: 0.08,
-          ease: 'power3.out', clearProps: 'willChange',
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.08,
+          ease: 'power3.out',
+          clearProps: 'willChange',
         },
-        '-=0.5',
+        '-=0.3',
       )
     }, sectionRef)
 
@@ -61,44 +99,45 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
-      <StarsBackground className="absolute inset-0 z-0" paused={animPaused} />
+      <div ref={starsRef} className="absolute inset-0 z-0">
+        <StarsBackground className="absolute inset-0 z-0" paused={animPaused} />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-10 w-full pt-32 pb-16 flex flex-col items-center text-center">
-        <div
-          ref={contentRef}
-          className="max-w-3xl flex flex-col items-center"
-        >
-          <div className="mb-6">
+        <div className="max-w-3xl flex flex-col items-center">
+
+          <div ref={badgeRef} className="mb-6">
             <span className="inline-block px-4 py-1.5 rounded-full bg-surface/40 border border-outline/50 backdrop-blur-sm text-[10px] font-medium uppercase tracking-[0.3em] text-primary font-body">
               Exploration Interface v4.0
             </span>
           </div>
 
           <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-6 flex flex-col items-center">
-            <span className="block text-star-white mb-2 text-glow-subtle">WELCOME TO</span>
-            <span className="block bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent text-glow pb-2">
+            <span ref={headlineTopRef} className="block text-star-white mb-2 text-glow-subtle">WELCOME TO</span>
+            <span ref={headlineBottomRef} className="block bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent text-glow pb-2">
               COSMOQUEST
             </span>
           </h1>
 
-          <p className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl">
+          <p ref={taglineRef} className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl">
             Explore the Universe. Discover the Unknown.
           </p>
 
-          <p className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10">
+          <p ref={descRef} className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10">
             Dive into the wonders of space. Explore planets, meet legendary astronauts,
             discover epic missions, and learn amazing facts about the cosmos.
           </p>
 
-          <div>
+          <div ref={ctaRef}>
             <a
               href="#categories"
-              className="inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:bg-primary-dim transition-all duration-300 accent-glow-strong hover:scale-105 active:scale-95"
+              className="inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:bg-primary-dim transition-[background-color] duration-300 accent-glow-strong hover:scale-105 active:scale-95"
             >
               Start Exploring
             </a>
           </div>
+
         </div>
       </div>
 
@@ -108,7 +147,7 @@ export function Hero() {
       {/* Explore Categories */}
       <div id="categories" className="relative z-20 mt-auto pb-16">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-          <div className="flex items-center gap-4 mb-8">
+          <div ref={categoryTitleRef} className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-outline to-transparent" />
             <h2 className="font-headline text-sm font-bold uppercase tracking-[0.2em] text-star-white">
               Explore Categories
