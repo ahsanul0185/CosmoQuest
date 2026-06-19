@@ -1,5 +1,7 @@
 
 
+import { SectionHeader } from '../ui/SectionHeader'
+
 const facts = [
   {
     id: 'f1',
@@ -55,11 +57,7 @@ export function Facts() {
   return (
     <section id="facts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <h2
-          className="font-headline text-4xl font-light text-center mb-24 uppercase tracking-widest"
-        >
-          Cosmic <span className="font-bold">Telemetry</span>
-        </h2>
+        <SectionHeader title="Cosmic" highlight="Telemetry" />
 
         <div className="relative max-w-4xl mx-auto border-l border-outline pl-12 space-y-16">
           {facts.map((fact, index) => (

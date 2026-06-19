@@ -1,3 +1,5 @@
+import { SectionHeader } from '../ui/SectionHeader'
+
 const galaxies = [
   {
     id: 'g1',
@@ -45,12 +47,7 @@ export function Galaxies({ onSelect }) {
   return (
     <section id="galaxies" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <div className="flex items-center gap-6 mb-12">
-          <h2 className="font-headline text-4xl font-light">
-            Deep <span className="font-bold">Space</span>
-          </h2>
-          <div className="h-px flex-grow bg-gradient-to-r from-outline to-transparent" />
-        </div>
+        <SectionHeader title="Deep" highlight="Space" />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {galaxies.map((galaxy) => (

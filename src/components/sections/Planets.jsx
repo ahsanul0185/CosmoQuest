@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { SectionHeader } from '../ui/SectionHeader'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -128,14 +129,9 @@ export function Planets({ onSelect }) {
   return (
     <section id="planets" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <div ref={headingRef} className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
-          <h2 className="font-headline text-4xl font-light tracking-tighter">
-            Planetary <span className="font-bold">Catalog</span>
-          </h2>
-          <p className="text-xs font-mono text-on-surface-variant/60 uppercase">
-            Total: 08 Terrestrial &amp; Gaseous
-          </p>
-        </div>
+        <SectionHeader ref={headingRef} title="Planetary" highlight="Catalog">
+          Total: 08 Terrestrial &amp; Gaseous
+        </SectionHeader>
 
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-outline">
           {planets.map((planet) => (

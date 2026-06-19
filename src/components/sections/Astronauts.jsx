@@ -1,3 +1,5 @@
+import { SectionHeader } from '../ui/SectionHeader'
+
 const astronauts = [
   {
     id: 'a1',
@@ -55,14 +57,9 @@ export function Astronauts({ onSelect }) {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
 
         {/* Header */}
-        <div className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
-          <h2 className="font-headline text-4xl font-light tracking-tighter">
-            Personnel <span className="font-bold">Log</span>
-          </h2>
-          <p className="text-xs font-mono text-on-surface-variant/60 uppercase">
-            Total: {String(astronauts.length).padStart(2, '0')} Crew Members
-          </p>
-        </div>
+        <SectionHeader title="Personnel" highlight="Log">
+          Total: {String(astronauts.length).padStart(2, '0')} Crew Members
+        </SectionHeader>
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

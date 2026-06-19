@@ -1,3 +1,5 @@
+import { SectionHeader } from '../ui/SectionHeader'
+
 const missions = [
   {
     id: 'm1',
@@ -77,12 +79,9 @@ export function Missions({ onSelect }) {
   return (
     <section id="missions" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between mb-12 border-b border-outline pb-4">
-          <h2 className="font-headline text-3xl font-light">
-            Mission <span className="font-bold">Protocol</span>
-          </h2>
-          <span className="text-xs font-mono text-on-surface-variant/60">Status: Active</span>
-        </div>
+        <SectionHeader title="Mission" highlight="Protocol">
+          Status: Active
+        </SectionHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {missions.map((mission) => (
