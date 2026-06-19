@@ -5,7 +5,7 @@ const astronauts = [
     role: 'Apollo 11 Commander',
     country: 'USA',
     description: 'First person to walk on the Moon.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Neil_Armstrong_pose.jpg',
+    image: '/astronauts/Neil_Armstrong.jpg',
   },
   {
     id: 'a2',
@@ -13,7 +13,7 @@ const astronauts = [
     role: 'Mission Specialist',
     country: 'India',
     description: 'First woman of Indian origin in space.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/9c/Kalpana_Chawla%2C_NASA_photo_portrait_in_orange_suit.jpg',
+    image: '/astronauts/Kalpana_Chawla.jpg',
   },
   {
     id: 'a3',
@@ -21,7 +21,7 @@ const astronauts = [
     role: 'Station Commander',
     country: 'USA',
     description: 'Record holder for spacewalks by a woman.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/00/Sunita_Williams.jpg',
+    image: '/astronauts/Sunita_Williams.jpg',
   },
   {
     id: 'a4',
@@ -29,7 +29,7 @@ const astronauts = [
     role: 'Vostok 1 Pilot',
     country: 'USSR',
     description: 'First human to journey into outer space.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Yuri_Gagarin_%281961%29.jpg',
+    image: '/astronauts/Yuri_Gagarin.jpg',
   },
   {
     id: 'a5',
@@ -37,7 +37,7 @@ const astronauts = [
     role: 'Mission Specialist',
     country: 'USA',
     description: 'First American woman in space.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/0/0c/Sally_Ride_%281984%29.jpg',
+    image: '/astronauts/Sally_Ride.jpg',
   },
   {
     id: 'a6',
@@ -45,7 +45,7 @@ const astronauts = [
     role: 'Soyuz T-11 Cosmonaut',
     country: 'India',
     description: 'First Indian citizen to travel in space.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Rakesh_Sharma.jpg',
+    image: '/astronauts/Rakesh_Sharma.jpg',
   },
 ]
 
@@ -53,56 +53,78 @@ export function Astronauts({ onSelect }) {
   return (
     <section id="astronauts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between mb-12 border-b border-outline pb-4">
-          <h2 className="font-headline text-3xl font-light">
+
+        {/* Header */}
+        <div className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
+          <h2 className="font-headline text-4xl font-light tracking-tighter">
             Personnel <span className="font-bold">Log</span>
           </h2>
-          <span className="text-[10px] font-mono opacity-40">Records: {String(astronauts.length).padStart(2, '0')}</span>
+          <p className="text-[10px] font-mono opacity-40 uppercase">
+            Total: {String(astronauts.length).padStart(2, '0')} Crew Members
+          </p>
         </div>
 
-        <div className="space-y-px bg-outline">
-          {astronauts.map((astronaut) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {astronauts.map((astronaut, i) => (
             <div
               key={astronaut.id}
               onClick={() => onSelect(astronaut)}
-              className="bg-background p-6 flex items-center justify-between group hover:bg-surface-bright transition-all cursor-pointer"
+              className="bg-background group cursor-pointer overflow-hidden hover:bg-surface transition-colors"
             >
-              <div className="flex items-center gap-6">
-                <div className="w-14 h-14 bg-surface border border-outline grayscale group-hover:grayscale-0 group-hover:border-primary transition-all p-0.5 overflow-hidden shrink-0">
-                  <img
-                    src={astronaut.image}
-                    alt={astronaut.name}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div>
-                  <h4 className="font-headline text-lg group-hover:text-primary transition-colors">
-                    {astronaut.name}
-                  </h4>
-                  <p className="text-[10px] text-on-surface-variant uppercase tracking-widest">
-                    {astronaut.role}
-                  </p>
+              {/* Portrait image */}
+              <div className="aspect-[3/4] overflow-hidden relative">
+                <img
+                  src={astronaut.image}
+                  alt={astronaut.name}
+                  className="w-full h-full object-cover object-top scale-105 group-hover:scale-100 grayscale group-hover:grayscale-0 transition-all duration-700 will-change-transform"
+                  loading="lazy"
+                />
+                {/* Country badge */}
+                <span className="absolute top-3 right-3 text-[9px] font-mono uppercase tracking-widest bg-background/80 backdrop-blur-sm text-on-surface-variant px-2 py-1 border border-outline">
+                  {astronaut.country}
+                </span>
+                {/* Index */}
+                <span className="absolute top-3 left-3 text-[9px] font-mono text-primary opacity-60">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </div>
+
+              {/* Info */}
+              <div className="p-5 border-t border-outline">
+                <p className="text-[9px] font-mono text-primary uppercase tracking-[0.2em] mb-2">
+                  {astronaut.role}
+                </p>
+                <h3 className="font-headline text-xl mb-2 group-hover:text-primary transition-colors">
+                  {astronaut.name}
+                </h3>
+                <p className="text-xs text-on-surface-variant font-light leading-relaxed">
+                  {astronaut.description}
+                </p>
+
+                {/* View detail row */}
+                <div className="mt-4 flex items-center gap-2 text-[10px] font-mono text-outline group-hover:text-primary transition-colors">
+                  <span>View Profile</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M7 17L17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
                 </div>
               </div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all shrink-0"
-              >
-                <path d="M7 17L17 7" />
-                <path d="M7 7h10v10" />
-              </svg>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   )
