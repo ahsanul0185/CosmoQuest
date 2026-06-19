@@ -1,3 +1,9 @@
+import { useRef, useEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
 const planets = [
   {
     id: '001',
@@ -82,10 +88,47 @@ const planets = [
 ]
 
 export function Planets({ onSelect }) {
+  const gridRef = useRef(null)
+  const headingRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Heading fade in
+      gsap.set(headingRef.current, { opacity: 0, y: 24 })
+      gsap.to(headingRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: headingRef.current,
+          start: 'top 75%',
+        },
+      })
+
+      // Cards stagger in as grid enters viewport
+      const cards = gridRef.current.children
+      gsap.set(cards, { opacity: 0, y: 80 })
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.13,
+        ease: 'power2.out',
+        clearProps: 'willChange',
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: 'top 65%',
+        },
+      })
+    })
+
+    return () => ctx.revert()
+  }, [])
   return (
     <section id="planets" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <div className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
+        <div ref={headingRef} className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
           <h2 className="font-headline text-4xl font-light tracking-tighter">
             Planetary <span className="font-bold">Catalog</span>
           </h2>
@@ -94,7 +137,7 @@ export function Planets({ onSelect }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-outline">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-outline">
           {planets.map((planet) => (
             <div
               key={planet.id}
