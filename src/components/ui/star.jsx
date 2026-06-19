@@ -71,7 +71,7 @@ function StarsBackground({
   speed = 50,
   transition = { stiffness: 50, damping: 20 },
   starColor = '#fff',
-  pointerEvents = true,
+  pointerEvents = false,
   ...props
 }) {
   const offsetX = useMotionValue(1);

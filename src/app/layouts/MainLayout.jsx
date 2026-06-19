@@ -1,5 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
+import { useLenis } from '../../hooks/useLenis'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -11,6 +12,7 @@ const navItems = [
 ]
 
 export function MainLayout() {
+  useLenis()
   return (
     <div className="min-h-screen bg-background text-on-surface font-body">
       <motion.header

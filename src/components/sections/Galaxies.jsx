@@ -62,7 +62,7 @@ export function Galaxies({ onSelect }) {
               <img
                 src={galaxy.image}
                 alt={galaxy.name}
-                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-[transform,filter] duration-700 will-change-transform"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
