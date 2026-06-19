@@ -71,6 +71,13 @@ export function Modal({ item, onClose }) {
 
             <div className="flex flex-col lg:flex-row h-full">
               {/* Image side */}
+              {isPlanet ?               <div className="lg:w-2/5 h-80 flex flex-col justify-center lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
+                <img
+                  src={item.image || 'https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg'}
+                  alt={item.name}
+                  className="w-full my-auto object-cover"
+                />
+              </div> : 
               <div className="lg:w-2/5 h-80 lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
                 <img
                   src={item.image || 'https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg'}
@@ -78,6 +85,7 @@ export function Modal({ item, onClose }) {
                   className="w-full h-full object-cover"
                 />
               </div>
+              }
 
               {/* Content side */}
               <div className="lg:w-3/5 p-12 lg:p-20 overflow-y-auto max-h-[70vh] lg:max-h-none">
