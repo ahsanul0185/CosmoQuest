@@ -107,29 +107,29 @@ export function Hero() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-10 w-full pt-32 pb-16 flex flex-col items-center text-center">
         <div className="max-w-3xl flex flex-col items-center">
 
-          <div ref={badgeRef} className="mb-6">
+          <div ref={badgeRef} className="mb-6 opacity-0">
             <span className="inline-block px-4 py-1.5 rounded-full bg-surface/40 border border-outline/50 backdrop-blur-sm text-[10px] font-medium uppercase tracking-[0.3em] text-primary font-body">
               Exploration Interface v4.0
             </span>
           </div>
 
           <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-6 flex flex-col items-center">
-            <span ref={headlineTopRef} className="block text-star-white mb-2 text-glow-subtle">WELCOME TO</span>
-            <span ref={headlineBottomRef} className="block bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent text-glow pb-2">
+            <span ref={headlineTopRef} className="block text-star-white mb-2 text-glow-subtle opacity-0">WELCOME TO</span>
+            <span ref={headlineBottomRef} className="block bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent text-glow pb-2 opacity-0">
               COSMOQUEST
             </span>
           </h1>
 
-          <p ref={taglineRef} className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl">
+          <p ref={taglineRef} className="text-xl sm:text-2xl text-secondary font-headline font-medium mb-6 mt-2 max-w-2xl opacity-0">
             Explore the Universe. Discover the Unknown.
           </p>
 
-          <p ref={descRef} className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10">
+          <p ref={descRef} className="text-base sm:text-lg text-on-surface-variant font-body font-light leading-relaxed max-w-2xl mb-10 opacity-0">
             Dive into the wonders of space. Explore planets, meet legendary astronauts,
             discover epic missions, and learn amazing facts about the cosmos.
           </p>
 
-          <div ref={ctaRef}>
+          <div ref={ctaRef} className="opacity-0">
             <a
               href="#categories"
               className="inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:bg-primary-dim transition-[background-color] duration-300 accent-glow-strong hover:scale-105 active:scale-95"
@@ -147,7 +147,7 @@ export function Hero() {
       {/* Explore Categories */}
       <div id="categories" className="relative z-20 mt-auto pb-16">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-          <div ref={categoryTitleRef} className="flex items-center gap-4 mb-8">
+          <div ref={categoryTitleRef} className="flex items-center gap-4 mb-8 opacity-0">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-outline to-transparent" />
             <h2 className="font-headline text-sm font-bold uppercase tracking-[0.2em] text-star-white">
               Explore Categories
@@ -159,7 +159,7 @@ export function Hero() {
             {categories.map((category) => (
               <div
                 key={category.name}
-                className="group cursor-pointer rounded-xl border border-outline bg-surface/60 backdrop-blur-sm p-5 hover:border-primary hover:bg-surface-bright/80 transition-[border-color,background-color] duration-300"
+                className="group cursor-pointer rounded-xl border border-outline bg-surface/60 backdrop-blur-sm p-5 hover:border-primary hover:bg-surface-bright/80 transition-[border-color,background-color] duration-300 opacity-0"
               >
                 <div className="mb-4 flex items-center justify-center">
                   <CategoryIcon name={category.icon} />
