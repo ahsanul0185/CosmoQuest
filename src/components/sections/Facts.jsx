@@ -55,7 +55,7 @@ const facts = [
 ]
 
 export function Facts() {
-  const { headingRef, gridRef } = useScrollReveal()
+  const { headingRef, gridRef } = useScrollReveal({ mode: 'individual' })
   return (
     <section id="facts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
