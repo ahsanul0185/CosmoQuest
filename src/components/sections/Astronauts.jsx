@@ -1,5 +1,3 @@
-import { motion } from 'motion/react'
-
 const astronauts = [
   {
     id: 'a1',
@@ -55,36 +53,22 @@ export function Astronauts({ onSelect }) {
   return (
     <section id="astronauts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-between mb-12 border-b border-outline pb-4"
-        >
+        <div className="flex items-center justify-between mb-12 border-b border-outline pb-4">
           <h2 className="font-headline text-3xl font-light">
             Personnel <span className="font-bold">Log</span>
           </h2>
           <span className="text-[10px] font-mono opacity-40">Records: {String(astronauts.length).padStart(2, '0')}</span>
-        </motion.div>
+        </div>
 
         <div className="space-y-px bg-outline">
-          {astronauts.map((astronaut, index) => (
-            <motion.div
+          {astronauts.map((astronaut) => (
+            <div
               key={astronaut.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.06,
-                ease: [0.16, 1, 0.3, 1],
-              }}
               onClick={() => onSelect(astronaut)}
               className="bg-background p-6 flex items-center justify-between group hover:bg-surface-bright transition-all cursor-pointer"
             >
               <div className="flex items-center gap-6">
-                <div className="w-14 h-14 bg-surface border border-outline grayscale group-hover:grayscale-0 group-hover:border-primary transition-all p-0.5 overflow-hidden flex-shrink-0">
+                <div className="w-14 h-14 bg-surface border border-outline grayscale group-hover:grayscale-0 group-hover:border-primary transition-all p-0.5 overflow-hidden shrink-0">
                   <img
                     src={astronaut.image}
                     alt={astronaut.name}
@@ -111,12 +95,12 @@ export function Astronauts({ onSelect }) {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all flex-shrink-0"
+                className="text-outline group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all shrink-0"
               >
                 <path d="M7 17L17 7" />
                 <path d="M7 7h10v10" />
               </svg>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

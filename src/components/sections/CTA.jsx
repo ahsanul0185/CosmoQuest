@@ -1,14 +1,10 @@
-import { motion } from 'motion/react'
+
 
 export function CTA() {
   return (
     <section className="py-24 border-t border-outline">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        <div
         >
           <h2 className="font-headline text-3xl font-light mb-6">
             Ready to <span className="font-bold">Explore?</span>
@@ -22,7 +18,7 @@ export function CTA() {
           >
             Start Exploring
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

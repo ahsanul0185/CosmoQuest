@@ -1,4 +1,4 @@
-import { motion } from 'motion/react'
+
 
 const facts = [
   {
@@ -55,32 +55,20 @@ export function Facts() {
   return (
     <section id="facts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        <h2
           className="font-headline text-4xl font-light text-center mb-24 uppercase tracking-widest"
         >
           Cosmic <span className="font-bold">Telemetry</span>
-        </motion.h2>
+        </h2>
 
         <div className="relative max-w-4xl mx-auto border-l border-outline pl-12 space-y-16">
           {facts.map((fact, index) => (
-            <motion.div
+            <div
               key={fact.id}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.06,
-                ease: [0.16, 1, 0.3, 1],
-              }}
               className="relative"
             >
               <div
-                className={`absolute -left-[53px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-background ${
+                className={`absolute left-[-53px] top-1 w-2.5 h-2.5 rounded-full ring-4 ring-background ${
                   fact.active
                     ? 'bg-primary'
                     : 'border border-outline bg-background'
@@ -96,7 +84,7 @@ export function Facts() {
               <p className="font-headline text-2xl font-light leading-snug">
                 {fact.text}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

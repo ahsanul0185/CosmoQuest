@@ -1,4 +1,3 @@
-import { motion } from 'motion/react'
 import { useState } from 'react'
 
 const planets = [
@@ -88,33 +87,19 @@ export function Planets({ onSelect }) {
   return (
     <section id="planets" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-baseline justify-between mb-12 border-b border-outline pb-6"
-        >
+        <div className="flex items-baseline justify-between mb-12 border-b border-outline pb-6">
           <h2 className="font-headline text-4xl font-light tracking-tighter">
             Planetary <span className="font-bold">Catalog</span>
           </h2>
           <p className="text-[10px] font-mono opacity-40 uppercase">
             Total: 08 Terrestrial &amp; Gaseous
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-outline">
-          {planets.map((planet, index) => (
-            <motion.div
+          {planets.map((planet) => (
+            <div
               key={planet.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-                ease: [0.16, 1, 0.3, 1],
-              }}
               onClick={() => onSelect(planet)}
               className="bg-background group cursor-pointer overflow-hidden p-6 hover:bg-surface transition-colors"
             >
@@ -135,7 +120,7 @@ export function Planets({ onSelect }) {
               <p className="text-xs text-on-surface-variant font-light">
                 {planet.type} // {planet.moons} Moons
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 

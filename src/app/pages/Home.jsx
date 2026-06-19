@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { Hero } from '../../components/sections/Hero/Hero'
-import { Planets } from '../../components/sections/Planets/Planets'
-import { Astronauts } from '../../components/sections/Astronauts/Astronauts'
-import { Missions } from '../../components/sections/Missions/Missions'
-import { Galaxies } from '../../components/sections/Galaxies/Galaxies'
-import { Facts } from '../../components/sections/Facts/Facts'
-import { CTA } from '../../components/sections/CTA/CTA'
+import { Hero } from '../../components/sections/Hero'
+import { Planets } from '../../components/sections/Planets'
+import { Astronauts } from '../../components/sections/Astronauts'
+import { Missions } from '../../components/sections/Missions'
+import { Galaxies } from '../../components/sections/Galaxies'
+import { Facts } from '../../components/sections/Facts'
+import { CTA } from '../../components/sections/CTA'
 import { Modal } from '../../components/ui/Modal/Modal'
 
 export function Home() {

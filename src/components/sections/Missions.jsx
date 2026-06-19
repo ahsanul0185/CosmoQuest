@@ -1,5 +1,3 @@
-import { motion } from 'motion/react'
-
 const missions = [
   {
     id: 'm1',
@@ -73,31 +71,17 @@ export function Missions({ onSelect }) {
   return (
     <section id="missions" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex items-center justify-between mb-12 border-b border-outline pb-4"
-        >
+        <div className="flex items-center justify-between mb-12 border-b border-outline pb-4">
           <h2 className="font-headline text-3xl font-light">
             Mission <span className="font-bold">Protocol</span>
           </h2>
           <span className="text-[10px] font-mono opacity-40">Status: Active</span>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {missions.map((mission, index) => (
-            <motion.div
+          {missions.map((mission) => (
+            <div
               key={mission.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.08,
-                ease: [0.16, 1, 0.3, 1],
-              }}
               onClick={() => onSelect(mission)}
               className="border border-outline p-8 group hover:border-primary transition-colors cursor-pointer"
             >
@@ -130,7 +114,7 @@ export function Missions({ onSelect }) {
                   {mission.progressLabel}
                 </span>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
