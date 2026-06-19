@@ -1,12 +1,10 @@
 import { motion, AnimatePresence } from 'motion/react'
 
 export function Modal({ item, onClose }) {
-  if (!item) return null
-
-  const isPlanet = item.moons !== undefined
-  const isAstronaut = item.country !== undefined
-  const isMission = item.progress !== undefined
-  const isGalaxy = item.classification !== undefined
+  const isPlanet = item?.moons !== undefined
+  const isAstronaut = item?.country !== undefined
+  const isMission = item?.progress !== undefined
+  const isGalaxy = item?.classification !== undefined
 
   let category = 'Node Explorer'
   if (isPlanet) category = 'Planetary Node'
@@ -15,7 +13,7 @@ export function Modal({ item, onClose }) {
   if (isGalaxy) category = 'Deep Space Object'
 
   let keyLabel = 'Primary Telemetry'
-  let keyValue = item.distance || item.role || item.status || item.detail || 'Analyzing...'
+  let keyValue = item?.distance || item?.role || item?.status || item?.detail || 'Analyzing...'
 
   if (isPlanet) {
     keyLabel = 'Distance from Sun'
