@@ -9,6 +9,7 @@ const missions = [
     progressLabel: 'Max Dist',
     year: '1977',
     agency: 'NASA',
+    image: '/missions/voyeger-1.jpg',
   },
   {
     id: 'm2',
@@ -20,6 +21,7 @@ const missions = [
     progressLabel: '85% Compl.',
     year: '2023',
     agency: 'ISRO',
+    image: '/missions/chandrayaan-3.jpg',
   },
   {
     id: 'm3',
@@ -31,6 +33,7 @@ const missions = [
     progressLabel: 'Completed',
     year: '1969',
     agency: 'NASA',
+    image: '/missions/apollo-11.webp',
   },
   {
     id: 'm4',
@@ -42,6 +45,7 @@ const missions = [
     progressLabel: '95% Operational',
     year: '1990',
     agency: 'NASA/ESA',
+    image: '/missions/hubble-space-telescope.jpg',
   },
   {
     id: 'm5',
@@ -53,6 +57,7 @@ const missions = [
     progressLabel: '70% Mission',
     year: '2021',
     agency: 'NASA',
+    image: '/missions/mars-rover.jpg',
   },
   {
     id: 'm6',
@@ -64,6 +69,7 @@ const missions = [
     progressLabel: '45% Phase',
     year: '2025',
     agency: 'NASA',
+    image: '/missions/artemis-2.webp',
   },
 ]
 
@@ -83,36 +89,49 @@ export function Missions({ onSelect }) {
             <div
               key={mission.id}
               onClick={() => onSelect(mission)}
-              className="border border-outline p-8 group hover:border-primary transition-colors cursor-pointer"
+              className="border border-outline group hover:border-primary transition-colors cursor-pointer overflow-hidden"
             >
-              <div className="flex justify-between items-start mb-6">
-                <div className="px-2 py-1 bg-surface-bright text-primary text-[9px] font-bold uppercase tracking-widest border border-primary/20">
-                  {mission.name}
-                </div>
-                <span className="text-[9px] font-mono opacity-30">
-                  Status: {mission.status}
-                </span>
+              {/* Image */}
+              <div className="aspect-video overflow-hidden">
+                <img
+                  src={mission.image}
+                  alt={mission.title}
+                  className="w-full h-full object-cover scale-105 group-hover:scale-100 grayscale group-hover:grayscale-0 transition-all duration-700 will-change-transform"
+                  loading="lazy"
+                />
               </div>
-              <h4 className="font-headline text-xl mb-4">{mission.title}</h4>
-              <p className="text-sm text-on-surface-variant font-light leading-relaxed mb-6">
-                {mission.description}
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="flex-grow bg-outline h-[2px]">
-                  <div
-                    className="bg-primary h-full transition-all duration-1000"
-                    style={{
-                      width: `${mission.progress}%`,
-                      boxShadow:
-                        mission.progress === 100
-                          ? '0 0 10px rgba(135,129,255,0.5)'
-                          : 'none',
-                    }}
-                  />
+
+              {/* Content */}
+              <div className="p-8">
+                <div className="flex justify-between items-start mb-6">
+                  <div className="px-2 py-1 bg-surface-bright text-primary text-[9px] font-bold uppercase tracking-widest border border-primary/20">
+                    {mission.name}
+                  </div>
+                  <span className="text-[9px] font-mono opacity-30">
+                    Status: {mission.status}
+                  </span>
                 </div>
-                <span className="text-[10px] font-mono opacity-50 uppercase">
-                  {mission.progressLabel}
-                </span>
+                <h4 className="font-headline text-xl mb-4">{mission.title}</h4>
+                <p className="text-sm text-on-surface-variant font-light leading-relaxed mb-6">
+                  {mission.description}
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="grow bg-outline h-[2px]">
+                    <div
+                      className="bg-primary h-full transition-all duration-1000"
+                      style={{
+                        width: `${mission.progress}%`,
+                        boxShadow:
+                          mission.progress === 100
+                            ? '0 0 10px rgba(135,129,255,0.5)'
+                            : 'none',
+                      }}
+                    />
+                  </div>
+                  <span className="text-[10px] font-mono opacity-50 uppercase">
+                    {mission.progressLabel}
+                  </span>
+                </div>
               </div>
             </div>
           ))}

@@ -7,7 +7,7 @@ const galaxies = [
     description: 'Our home galaxy, a barred spiral galaxy containing our Solar System.',
     distance: '0 LY',
     funFact: 'The Milky Way is about 100,000 light-years in diameter.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/4/43/ESO-VLT-Laser-phot-33a-07.jpg',
+    image: '/deep-space/milky-way.jpg',
   },
   {
     id: 'g2',
@@ -17,7 +17,7 @@ const galaxies = [
     description: 'The nearest major galaxy to the Milky Way, on a collision course with us.',
     distance: '2.5M LY',
     funFact: 'Andromeda is approaching the Milky Way at 110 km/s.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Andromeda_Galaxy_%28with_h-alpha%29.jpg',
+    image: '/deep-space/andromeda-galaxy.jpg',
   },
   {
     id: 'g3',
@@ -27,7 +27,7 @@ const galaxies = [
     description: 'A lenticular galaxy with a prominent dust lane and bright nucleus.',
     distance: '29.3M LY',
     funFact: 'The Sombrero Galaxy has 2,000 globular clusters.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/M104_ngc4594_sombrero_galaxy.jpg',
+    image: '/deep-space/sombrero.jpg',
   },
   {
     id: 'g4',
@@ -37,7 +37,7 @@ const galaxies = [
     description: 'A grand-design spiral galaxy interacting with a smaller companion.',
     distance: '23M LY',
     funFact: 'The Whirlpool Galaxy was the first galaxy classified as spiral.',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/d/db/Messier51_sRGB.jpg',
+    image: '/deep-space/whirlpool-galaxy.webp',
   },
 ]
 
@@ -62,7 +62,7 @@ export function Galaxies({ onSelect }) {
               <img
                 src={galaxy.image}
                 alt={galaxy.name}
-                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-[transform,filter] duration-700 will-change-transform"
+                className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 will-change-transform"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
