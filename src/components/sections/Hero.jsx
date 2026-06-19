@@ -1,5 +1,10 @@
 import { motion } from 'motion/react'
 import { StarsBackground } from '../ui/star'
+import planetIcon from '../../assets/planet-svgrepo-com.svg'
+import astronautIcon from '../../assets/user-astronaut-svgrepo-com.svg'
+import rocketIcon from '../../assets/rocket-svgrepo-com.svg'
+import galaxyIcon from '../../assets/warp-galaxy-svgrepo-com.svg'
+import starIcon from '../../assets/star-svgrepo-com.svg'
 
 const categories = [
   { name: 'Planets', count: '8 Planets', icon: 'planet' },
@@ -135,44 +140,23 @@ function StarField() {
   )
 }
 
-function CategoryIcon({ name }) {
-  const icons = {
-    planet: (
-      <svg viewBox="0 0 48 48" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="24" cy="24" r="12" />
-        <ellipse cx="24" cy="24" rx="20" ry="7" />
-      </svg>
-    ),
-    astronaut: (
-      <svg viewBox="0 0 48 48" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="24" cy="18" r="8" />
-        <path d="M14 40c0-8 4-12 10-12s10 4 10 12" />
-        <circle cx="21" cy="17" r="1.5" fill="currentColor" />
-        <circle cx="27" cy="17" r="1.5" fill="currentColor" />
-      </svg>
-    ),
-    rocket: (
-      <svg viewBox="0 0 48 48" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 4c-8 8-10 20-8 32l8-4 8 4c2-12 0-24-8-32z" />
-        <circle cx="24" cy="22" r="4" />
-        <path d="M16 36c-4 0-8 4-8 8M32 36c4 0 8 4 8 8" />
-      </svg>
-    ),
-    galaxy: (
-      <svg viewBox="0 0 48 48" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="24" cy="24" r="4" />
-        <ellipse cx="24" cy="24" rx="18" ry="8" />
-        <ellipse cx="24" cy="24" rx="18" ry="8" transform="rotate(60 24 24)" />
-        <ellipse cx="24" cy="24" rx="18" ry="8" transform="rotate(120 24 24)" />
-      </svg>
-    ),
-    fact: (
-      <svg viewBox="0 0 48 48" className="w-12 h-12 text-primary" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M24 4l4 10h10l-8 7 3 10-9-6-9 6 3-10-8-7h10z" />
-        <circle cx="24" cy="34" r="4" />
-      </svg>
-    ),
-  }
+const categoryIcons = {
+  planet: planetIcon,
+  astronaut: astronautIcon,
+  rocket: rocketIcon,
+  galaxy: galaxyIcon,
+  fact: starIcon,
+}
 
-  return icons[name] || null
+function CategoryIcon({ name }) {
+  const src = categoryIcons[name]
+  if (!src) return null
+  return (
+    <img
+      src={src}
+      alt={name}
+      className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-opacity duration-300"
+      style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(3) hue-rotate(210deg) brightness(1.1)' }}
+    />
+  )
 }
