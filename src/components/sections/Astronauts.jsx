@@ -59,7 +59,7 @@ export function Astronauts({ onSelect }) {
           <h2 className="font-headline text-4xl font-light tracking-tighter">
             Personnel <span className="font-bold">Log</span>
           </h2>
-          <p className="text-[10px] font-mono opacity-40 uppercase">
+          <p className="text-xs font-mono text-on-surface-variant/60 uppercase">
             Total: {String(astronauts.length).padStart(2, '0')} Crew Members
           </p>
         </div>
@@ -81,29 +81,29 @@ export function Astronauts({ onSelect }) {
                   loading="lazy"
                 />
                 {/* Country badge */}
-                <span className="absolute top-3 right-3 text-[9px] font-mono uppercase tracking-widest bg-background/80 backdrop-blur-sm text-on-surface-variant px-2 py-1 border border-outline">
+                <span className="absolute top-3 right-3 text-xs font-mono uppercase tracking-widest bg-background/80 backdrop-blur-sm text-on-surface-variant px-2 py-1 border border-outline">
                   {astronaut.country}
                 </span>
                 {/* Index */}
-                <span className="absolute top-3 left-3 text-[9px] font-mono text-primary opacity-60">
+                <span className="absolute top-3 left-3 text-xs font-mono text-primary/70">
                   {String(i + 1).padStart(2, '0')}
                 </span>
               </div>
 
               {/* Info */}
               <div className="p-5 border-t border-outline">
-                <p className="text-[9px] font-mono text-primary uppercase tracking-[0.2em] mb-2">
+                <p className="text-xs font-mono text-primary/80 uppercase tracking-[0.2em] mb-2">
                   {astronaut.role}
                 </p>
                 <h3 className="font-headline text-xl mb-2 group-hover:text-primary transition-colors">
                   {astronaut.name}
                 </h3>
-                <p className="text-xs text-on-surface-variant font-light leading-relaxed">
+                <p className="text-sm text-on-surface-variant font-light leading-relaxed">
                   {astronaut.description}
                 </p>
 
                 {/* View detail row */}
-                <div className="mt-4 flex items-center gap-2 text-[10px] font-mono text-outline group-hover:text-primary transition-colors">
+                <div className="mt-4 flex items-center gap-2 text-xs font-mono text-on-surface-variant/60 group-hover:text-primary transition-colors">
                   <span>View Profile</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

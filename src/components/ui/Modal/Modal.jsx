@@ -90,10 +90,10 @@ export function Modal({ item, onClose }) {
               {/* Content side */}
               <div className="lg:w-3/5 p-12 lg:p-20 overflow-y-auto max-h-[70vh] lg:max-h-none">
                 <div className="flex items-center gap-4 mb-8">
-                  <span className="text-[10px] font-mono text-primary uppercase tracking-[0.4em]">
+                  <span className="text-xs font-mono text-primary uppercase tracking-[0.3em]">
                     {category}
                   </span>
-                  <div className="h-[1px] flex-grow bg-outline" />
+                  <div className="h-px grow bg-outline" />
                 </div>
 
                 <h2 className="font-headline text-5xl font-bold tracking-tighter mb-8">
@@ -106,13 +106,13 @@ export function Modal({ item, onClose }) {
 
                 <div className="grid grid-cols-2 gap-12 mb-12 border-y border-outline py-12">
                   <div>
-                    <p className="text-[9px] font-mono text-outline uppercase mb-2">
+                    <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
                       {keyLabel}
                     </p>
                     <p className="font-headline text-xl">{keyValue}</p>
                   </div>
                   <div>
-                    <p className="text-[9px] font-mono text-outline uppercase mb-2">
+                    <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
                       Connection Status
                     </p>
                     <p className="font-headline text-xl text-green-500">Stable</p>
@@ -120,7 +120,7 @@ export function Modal({ item, onClose }) {
                 </div>
 
                 <div>
-                  <p className="text-[9px] font-mono text-primary uppercase mb-3">
+                  <p className="text-xs font-mono text-primary/80 uppercase mb-3">
                     Auxiliary Data (Fun Fact)
                   </p>
                   <p className="text-sm font-light italic leading-relaxed text-on-surface-variant">

@@ -67,11 +67,11 @@ export function Galaxies({ onSelect }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
               <div className="absolute bottom-0 left-0 p-8 w-full border-t border-white/5 bg-background/20 backdrop-blur-sm">
-                <p className="text-[9px] font-mono text-primary uppercase tracking-[0.3em] mb-3">
+                <p className="text-xs font-mono text-primary/80 uppercase tracking-[0.3em] mb-3">
                   Classification: {galaxy.classification}
                 </p>
                 <h3 className="font-headline text-2xl font-bold mb-1">{galaxy.name}</h3>
-                <p className="text-xs text-on-surface-variant font-light">
+                <p className="text-sm text-on-surface-variant font-light">
                   {galaxy.detail}
                 </p>
               </div>

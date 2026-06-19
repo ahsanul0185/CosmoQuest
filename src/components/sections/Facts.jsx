@@ -75,8 +75,8 @@ export function Facts() {
                 }`}
               />
               <p
-                className={`text-[10px] font-mono uppercase mb-2 ${
-                  fact.active ? 'text-primary' : 'opacity-40'
+                className={`text-xs font-mono uppercase mb-2 ${
+                  fact.active ? 'text-primary' : 'text-on-surface-variant/60'
                 }`}
               >
                 {fact.label}

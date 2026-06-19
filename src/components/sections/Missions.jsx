@@ -81,7 +81,7 @@ export function Missions({ onSelect }) {
           <h2 className="font-headline text-3xl font-light">
             Mission <span className="font-bold">Protocol</span>
           </h2>
-          <span className="text-[10px] font-mono opacity-40">Status: Active</span>
+          <span className="text-xs font-mono text-on-surface-variant/60">Status: Active</span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -107,7 +107,7 @@ export function Missions({ onSelect }) {
                   <div className="px-2 py-1 bg-surface-bright text-primary text-[9px] font-bold uppercase tracking-widest border border-primary/20">
                     {mission.name}
                   </div>
-                  <span className="text-[9px] font-mono opacity-30">
+                  <span className="text-xs font-mono text-on-surface-variant/60">
                     Status: {mission.status}
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export function Missions({ onSelect }) {
                       }}
                     />
                   </div>
-                  <span className="text-[10px] font-mono opacity-50 uppercase">
+                  <span className="text-xs font-mono text-on-surface-variant/70 uppercase">
                     {mission.progressLabel}
                   </span>
                 </div>

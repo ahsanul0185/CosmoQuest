@@ -70,10 +70,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-outline py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-mono text-on-surface-variant opacity-50">
+          <p className="text-[10px] font-mono text-on-surface-variant/60">
             © {currentYear} CosmoQuest. All rights reserved.
           </p>
-          <p className="text-[10px] font-mono text-on-surface-variant opacity-30 uppercase tracking-widest">
+          <p className="text-[10px] font-mono text-on-surface-variant/40 uppercase tracking-widest">
             Coordinates: 00°00′00″N 00°00′00″E // Deep Space
           </p>
         </div>

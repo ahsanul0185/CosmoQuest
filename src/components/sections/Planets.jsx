@@ -132,7 +132,7 @@ export function Planets({ onSelect }) {
           <h2 className="font-headline text-4xl font-light tracking-tighter">
             Planetary <span className="font-bold">Catalog</span>
           </h2>
-          <p className="text-[10px] font-mono text-on-surface-variant/60 uppercase">
+          <p className="text-xs font-mono text-on-surface-variant/60 uppercase">
             Total: 08 Terrestrial &amp; Gaseous
           </p>
         </div>
@@ -152,13 +152,13 @@ export function Planets({ onSelect }) {
                   loading="lazy"
                 />
               </div>
-              <p className="text-[9px] font-mono text-primary uppercase tracking-[0.2em] mb-2">
+              <p className="text-xs font-mono text-primary/80 uppercase tracking-[0.2em] mb-2">
                 Node: {planet.id}
               </p>
               <h3 className="font-headline text-xl mb-1 group-hover:text-primary transition-colors">
                 {planet.name}
               </h3>
-              <p className="text-xs text-on-surface-variant font-light">
+              <p className="text-sm text-on-surface-variant font-light">
                 {planet.type} // {planet.moons} Moons
               </p>
             </div>
