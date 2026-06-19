@@ -77,8 +77,11 @@ export function Hero() {
         </motion.div>
       </div>
 
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent z-10 pointer-events-none" />
+
       {/* Explore Categories */}
-      <div id="categories" className="relative z-10 mt-auto pb-16">
+      <div id="categories" className="relative z-20 mt-auto pb-16">
         <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
           <div className="flex items-center gap-4 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-outline to-transparent" />
