@@ -5,6 +5,7 @@ import {
   motion,
   useMotionValue,
   useSpring,
+  useAnimationControls,
 } from 'motion/react';
 import { cn } from '../../utils/utils';
 
@@ -24,22 +25,35 @@ function generateStars(count, starColor) {
 function StarLayer({
   count = 1000,
   size = 1,
-  transition = { repeat: Infinity, duration: 50, ease: 'linear' },
+  duration = 50,
   starColor = '#fff',
+  paused = false,
   className,
   ...props
 }) {
   const [boxShadow, setBoxShadow] = React.useState('');
+  const controls = useAnimationControls();
 
   React.useEffect(() => {
     setBoxShadow(generateStars(count, starColor));
   }, [count, starColor]);
 
+  // Start or stop the scroll animation based on visibility
+  React.useEffect(() => {
+    if (paused) {
+      controls.stop();
+    } else {
+      controls.start({
+        y: [null, -2000],
+        transition: { repeat: Infinity, duration, ease: 'linear' },
+      });
+    }
+  }, [paused, duration, controls]);
+
   return (
     <motion.div
       data-slot="star-layer"
-      animate={{ y: [0, -2000] }}
-      transition={transition}
+      animate={controls}
       className={cn('absolute top-0 left-0 w-full h-[2000px]', className)}
       {...props}
     >
@@ -72,6 +86,7 @@ function StarsBackground({
   transition = { stiffness: 50, damping: 20 },
   starColor = '#fff',
   pointerEvents = false,
+  paused = false,
   ...props
 }) {
   const offsetX = useMotionValue(1);
@@ -82,6 +97,8 @@ function StarsBackground({
 
   const handleMouseMove = React.useCallback(
     (e) => {
+      // Skip mouse parallax updates when the hero is not visible
+      if (paused) return;
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
       const newOffsetX = -(e.clientX - centerX) * factor;
@@ -89,14 +106,14 @@ function StarsBackground({
       offsetX.set(newOffsetX);
       offsetY.set(newOffsetY);
     },
-    [offsetX, offsetY, factor],
+    [offsetX, offsetY, factor, paused],
   );
 
   return (
     <div
       data-slot="stars-background"
       className={cn(
-        'relative size-full overflow-hidden bg-[radial-gradient(ellipse_at_bottom,_#262626_0%,_#000_100%)]',
+        'relative size-full overflow-hidden bg-[radial-gradient(ellipse_at_bottom,#262626_0%,#000_100%)]',
         className,
       )}
       onMouseMove={handleMouseMove}
@@ -109,28 +126,23 @@ function StarsBackground({
         <StarLayer
           count={1000}
           size={1}
-          transition={{ repeat: Infinity, duration: speed, ease: 'linear' }}
+          duration={speed}
           starColor={starColor}
+          paused={paused}
         />
         <StarLayer
           count={400}
           size={2}
-          transition={{
-            repeat: Infinity,
-            duration: speed * 2,
-            ease: 'linear',
-          }}
+          duration={speed * 2}
           starColor={starColor}
+          paused={paused}
         />
         <StarLayer
           count={200}
           size={3}
-          transition={{
-            repeat: Infinity,
-            duration: speed * 3,
-            ease: 'linear',
-          }}
+          duration={speed * 3}
           starColor={starColor}
+          paused={paused}
         />
       </motion.div>
       {children}

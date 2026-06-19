@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import { StarsBackground } from '../ui/star'
 import planetIcon from '../../assets/planet-svgrepo-com.svg'
@@ -31,9 +32,28 @@ const stagger = {
 }
 
 export function Hero() {
+  const sectionRef = useRef(null)
+  const [animPaused, setAnimPaused] = useState(false)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Pause when the hero is fully out of view, resume when it re-enters
+        setAnimPaused(!entry.isIntersecting)
+      },
+      { threshold: 0 }, // fires as soon as even 1px is visible / hidden
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
-      <StarsBackground className="absolute inset-0 z-0" />
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
+      <StarsBackground className="absolute inset-0 z-0" paused={animPaused} />
 
       {/* Content */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-10 w-full pt-32 pb-16 flex flex-col items-center text-center">
