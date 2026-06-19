@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
+import { Footer } from '../../components/sections/Footer'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -71,6 +72,7 @@ export function MainLayout() {
       <main className="pt-0">
         <Outlet />
       </main>
+      <Footer />
     </div>
   )
 }
