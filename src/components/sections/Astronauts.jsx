@@ -1,4 +1,5 @@
 import { SectionHeader } from '../ui/SectionHeader'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const astronauts = [
   {
@@ -52,17 +53,18 @@ const astronauts = [
 ]
 
 export function Astronauts({ onSelect }) {
+  const { headingRef, gridRef } = useScrollReveal()
   return (
     <section id="astronauts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
 
         {/* Header */}
-        <SectionHeader title="Personnel" highlight="Log">
+        <SectionHeader ref={headingRef} title="Personnel" highlight="Log">
           Total: {String(astronauts.length).padStart(2, '0')} Crew Members
         </SectionHeader>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {astronauts.map((astronaut, i) => (
             <div
               key={astronaut.id}
@@ -70,7 +72,7 @@ export function Astronauts({ onSelect }) {
               className="bg-background group cursor-pointer overflow-hidden hover:bg-surface transition-colors"
             >
               {/* Portrait image */}
-              <div className="aspect-[3/4] overflow-hidden relative">
+              <div className="aspect-3/4 overflow-hidden relative">
                 <img
                   src={astronaut.image}
                   alt={astronaut.name}

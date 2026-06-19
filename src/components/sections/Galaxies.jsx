@@ -1,4 +1,5 @@
 import { SectionHeader } from '../ui/SectionHeader'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const galaxies = [
   {
@@ -44,12 +45,13 @@ const galaxies = [
 ]
 
 export function Galaxies({ onSelect }) {
+  const { headingRef, gridRef } = useScrollReveal()
   return (
     <section id="galaxies" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <SectionHeader title="Deep" highlight="Space" />
+        <SectionHeader ref={headingRef} title="Deep" highlight="Space" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {galaxies.map((galaxy) => (
             <div
               key={galaxy.id}

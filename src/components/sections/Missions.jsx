@@ -1,4 +1,5 @@
 import { SectionHeader } from '../ui/SectionHeader'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const missions = [
   {
@@ -76,14 +77,15 @@ const missions = [
 ]
 
 export function Missions({ onSelect }) {
+  const { headingRef, gridRef } = useScrollReveal()
   return (
     <section id="missions" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <SectionHeader title="Mission" highlight="Protocol">
+        <SectionHeader ref={headingRef} title="Mission" highlight="Protocol">
           Status: Active
         </SectionHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {missions.map((mission) => (
             <div
               key={mission.id}

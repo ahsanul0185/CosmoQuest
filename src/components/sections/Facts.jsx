@@ -1,6 +1,7 @@
 
 
 import { SectionHeader } from '../ui/SectionHeader'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 const facts = [
   {
@@ -54,12 +55,13 @@ const facts = [
 ]
 
 export function Facts() {
+  const { headingRef, gridRef } = useScrollReveal()
   return (
     <section id="facts" className="py-24">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
-        <SectionHeader title="Cosmic" highlight="Telemetry" />
+        <SectionHeader ref={headingRef} title="Cosmic" highlight="Telemetry" />
 
-        <div className="relative max-w-4xl mx-auto border-l border-outline pl-12 space-y-16">
+        <div ref={gridRef} className="relative max-w-4xl mx-auto border-l border-outline pl-12 space-y-16">
           {facts.map((fact, index) => (
             <div
               key={fact.id}
