@@ -45,7 +45,7 @@ export function Hero() {
   // GSAP entrance animations
   useEffect(() => {
     const els = [
-      badgeRef.current,
+      // badgeRef.current,
       headlineTopRef.current,
       headlineBottomRef.current,
       taglineRef.current,
@@ -107,11 +107,11 @@ export function Hero() {
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 lg:px-10 w-full pt-32 pb-16 flex flex-col items-center text-center">
         <div className="max-w-3xl flex flex-col items-center">
 
-          <div ref={badgeRef} className="mb-6 opacity-0">
+          {/* <div ref={badgeRef} className="mb-6 opacity-0">
             <span className="inline-block px-4 py-1.5 rounded-full bg-surface/40 border border-outline/50 backdrop-blur-sm text-[10px] font-medium uppercase tracking-[0.3em] text-primary font-body">
               Exploration Interface v4.0
             </span>
-          </div>
+          </div> */}
 
           <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95] mb-6 flex flex-col items-center">
             <span ref={headlineTopRef} className="block text-star-white mb-2 text-glow-subtle opacity-0">WELCOME TO</span>

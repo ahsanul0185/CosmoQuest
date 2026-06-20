@@ -1,33 +1,45 @@
 import { motion, AnimatePresence } from 'motion/react'
 
 export function Modal({ item, onClose }) {
-  const isPlanet = item?.moons !== undefined
-  const isAstronaut = item?.country !== undefined
-  const isMission = item?.progress !== undefined
-  const isGalaxy = item?.classification !== undefined
-
-  let category = 'Node Explorer'
-  if (isPlanet) category = 'Planetary Node'
-  if (isAstronaut) category = 'Personnel Record'
-  if (isMission) category = 'Mission Protocol'
-  if (isGalaxy) category = 'Deep Space Object'
-
-  let keyLabel = 'Primary Telemetry'
-  let keyValue = item?.distance || item?.role || item?.status || item?.detail || 'Analyzing...'
-
-  if (isPlanet) {
-    keyLabel = 'Distance from Sun'
-    keyValue = item.distance
-  } else if (isAstronaut) {
-    keyLabel = 'Role / Country'
-    keyValue = `${item.role} // ${item.country}`
-  } else if (isMission) {
-    keyLabel = 'Mission Status'
-    keyValue = `${item.status} // ${item.year}`
-  } else if (isGalaxy) {
-    keyLabel = 'Distance from Earth'
-    keyValue = item.distance
+  // Determine Category safely
+  let category = item?.category || 'Database Record'
+  if (!item?.category) {
+    if (item?.moons !== undefined) category = 'Planetary Node'
+    if (item?.country !== undefined) category = 'Personnel Record'
+    if (item?.progress !== undefined) category = 'Mission Protocol'
+    if (item?.classification !== undefined) category = 'Deep Space Object'
   }
+
+  // Determine Grid Details intelligently
+  let gridDetails = item?.details || []
+  
+  if (!item?.details) {
+    // Backward compatibility fallback logic
+    let keyLabel = 'Primary Telemetry'
+    let keyValue = item?.distance || item?.role || item?.status || item?.detail || 'Analyzing...'
+    
+    if (item?.moons !== undefined) {
+      keyLabel = 'Distance from Sun'
+      keyValue = item?.distance
+    } else if (item?.country !== undefined) {
+      keyLabel = 'Role / Country'
+      keyValue = `${item?.role} // ${item?.country}`
+    } else if (item?.progress !== undefined) {
+      keyLabel = 'Mission Status'
+      keyValue = `${item?.status} // ${item?.year}`
+    } else if (item?.classification !== undefined) {
+      keyLabel = 'Distance from Earth'
+      keyValue = item?.distance
+    }
+
+    gridDetails = [
+      { label: keyLabel, value: keyValue },
+      { label: 'Connection Status', value: <span className="text-green-500">Stable</span> }
+    ]
+  }
+
+  // Determine if it needs image special handling (fallback to standard if missing image)
+  const imageUrl = item?.image || 'https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg'
 
   return (
     <AnimatePresence>
@@ -38,7 +50,7 @@ export function Modal({ item, onClose }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-2xl flex items-center justify-center p-6"
+          className="fixed inset-0 z-100 bg-background/95 backdrop-blur-2xl flex items-center justify-center p-6"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -71,21 +83,13 @@ export function Modal({ item, onClose }) {
 
             <div className="flex flex-col lg:flex-row h-full">
               {/* Image side */}
-              {isPlanet ?               <div className="lg:w-2/5 h-80 flex flex-col justify-center lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
+              <div className="lg:w-2/5 h-80 flex flex-col justify-center lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
                 <img
-                  src={item.image || 'https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg'}
+                  src={imageUrl}
                   alt={item.name}
-                  className="w-full my-auto object-cover"
-                />
-              </div> : 
-              <div className="lg:w-2/5 h-80 lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
-                <img
-                  src={item.image || 'https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg'}
-                  alt={item.name}
-                  className="w-full h-full object-cover"
+                  className="w-full my-auto object-cover max-h-full"
                 />
               </div>
-              }
 
               {/* Content side */}
               <div className="lg:w-3/5 p-12 lg:p-20 overflow-y-auto max-h-[70vh] lg:max-h-none">
@@ -105,18 +109,14 @@ export function Modal({ item, onClose }) {
                 </p>
 
                 <div className="grid grid-cols-2 gap-12 mb-12 border-y border-outline py-12">
-                  <div>
-                    <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
-                      {keyLabel}
-                    </p>
-                    <p className="font-headline text-xl">{keyValue}</p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
-                      Connection Status
-                    </p>
-                    <p className="font-headline text-xl text-green-500">Stable</p>
-                  </div>
+                  {gridDetails.map((detail, index) => (
+                    <div key={index}>
+                      <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
+                        {detail.label}
+                      </p>
+                      <p className="font-headline text-xl">{detail.value}</p>
+                    </div>
+                  ))}
                 </div>
 
                 <div>
