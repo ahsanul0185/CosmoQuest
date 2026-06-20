@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
 import { Footer } from '../../components/sections/Footer'
 import { HeaderSearch } from '../../components/ui/HeaderSearch'
+import { MobileMenu } from '../../components/ui/MobileMenu'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -47,7 +48,12 @@ export function MainLayout() {
             ))}
           </div>
 
-          <HeaderSearch />
+          <div className="flex items-center gap-4">
+            <div className="hidden md:block">
+              <HeaderSearch />
+            </div>
+            <MobileMenu />
+          </div>
         </nav>
       </motion.header>
 
