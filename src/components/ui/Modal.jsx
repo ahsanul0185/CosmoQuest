@@ -50,7 +50,7 @@ export function Modal({ item, onClose }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 z-100 bg-background/95 backdrop-blur-2xl flex items-center justify-center p-6"
+          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-2xl flex items-start sm:items-center justify-center p-3 sm:p-6 overflow-y-auto"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -58,11 +58,11 @@ export function Modal({ item, onClose }) {
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="system-border max-w-5xl w-full bg-background overflow-hidden relative shadow-2xl max-h-[90vh]"
+            className="system-border max-w-5xl w-full bg-background overflow-hidden relative shadow-2xl my-4 sm:my-0"
           >
             <button
               onClick={onClose}
-              className="absolute top-8 right-8 z-20 text-on-surface-variant hover:text-primary transition-all text-3xl"
+              className="absolute top-4 right-4 sm:top-8 sm:right-8 z-20 text-on-surface-variant hover:text-primary transition-all text-2xl sm:text-3xl bg-background/60 backdrop-blur-sm rounded-full p-1 sm:p-0"
               aria-label="Close"
             >
               <svg
@@ -81,9 +81,9 @@ export function Modal({ item, onClose }) {
               </svg>
             </button>
 
-            <div className="flex flex-col lg:flex-row h-full">
+            <div className="flex flex-col lg:flex-row">
               {/* Image side */}
-              <div className="lg:w-2/5 h-80 flex flex-col justify-center lg:h-auto overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
+              <div className="lg:w-2/5 h-64 sm:h-80 lg:h-auto lg:min-h-[500px] flex flex-col justify-center overflow-hidden border-b lg:border-b-0 lg:border-r border-outline">
                 <img
                   src={imageUrl}
                   alt={item.name}
@@ -92,35 +92,35 @@ export function Modal({ item, onClose }) {
               </div>
 
               {/* Content side */}
-              <div className="lg:w-3/5 p-12 lg:p-20 overflow-y-auto max-h-[70vh] lg:max-h-none">
-                <div className="flex items-center gap-4 mb-8">
-                  <span className="text-xs font-mono text-primary uppercase tracking-[0.3em]">
+              <div className="lg:w-3/5 p-6 sm:p-10 lg:p-16">
+                <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-8">
+                  <span className="text-[10px] sm:text-xs font-mono text-primary uppercase tracking-[0.2em] sm:tracking-[0.3em]">
                     {category}
                   </span>
                   <div className="h-px grow bg-outline" />
                 </div>
 
-                <h2 className="font-headline text-5xl font-bold tracking-tighter mb-8">
+                <h2 className="font-headline text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 sm:mb-8">
                   {item.name}
                 </h2>
 
-                <p className="text-on-surface-variant text-lg font-light mb-12 leading-relaxed">
+                <p className="text-on-surface-variant text-base sm:text-lg font-light mb-8 sm:mb-12 leading-relaxed">
                   {item.description}
                 </p>
 
-                <div className="grid grid-cols-2 gap-12 mb-12 border-y border-outline py-12">
+                <div className="grid grid-cols-2 gap-6 sm:gap-12 mb-8 sm:mb-12 border-y border-outline py-6 sm:py-12">
                   {gridDetails.map((detail, index) => (
                     <div key={index}>
-                      <p className="text-xs font-mono text-on-surface-variant/70 uppercase mb-2">
+                      <p className="text-[10px] sm:text-xs font-mono text-on-surface-variant/70 uppercase mb-1 sm:mb-2">
                         {detail.label}
                       </p>
-                      <p className="font-headline text-xl">{detail.value}</p>
+                      <p className="font-headline text-base sm:text-xl">{detail.value}</p>
                     </div>
                   ))}
                 </div>
 
                 <div>
-                  <p className="text-xs font-mono text-primary/80 uppercase mb-3">
+                  <p className="text-[10px] sm:text-xs font-mono text-primary/80 uppercase mb-2 sm:mb-3">
                     Auxiliary Data (Fun Fact)
                   </p>
                   <p className="text-sm font-light italic leading-relaxed text-on-surface-variant">

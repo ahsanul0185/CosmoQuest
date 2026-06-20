@@ -48,6 +48,11 @@ export function Explore() {
 
   const filteredData = useFilteredData(spaceData, searchQuery, activeCategory)
 
+  // Scroll to top when landing on explore page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   // Create a key that changes whenever search/filter changes to re-trigger animations
   const animationKey = `${searchQuery}-${activeCategory}`
   const { gridRef } = useScrollReveal({ mode: 'individual', scale: true, key: animationKey })
