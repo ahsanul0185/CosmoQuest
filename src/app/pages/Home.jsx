@@ -6,7 +6,7 @@ import { Missions } from '../../components/sections/Missions'
 import { Galaxies } from '../../components/sections/Galaxies'
 import { Facts } from '../../components/sections/Facts'
 import { CTA } from '../../components/sections/CTA'
-import { Modal } from '../../components/ui/Modal/Modal'
+import { Modal } from '../../components/ui/Modal'
 
 export function Home() {
   const [selectedItem, setSelectedItem] = useState(null)
