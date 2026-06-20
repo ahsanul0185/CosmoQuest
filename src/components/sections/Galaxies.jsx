@@ -28,14 +28,18 @@ export function Galaxies({ onSelect }) {
                 </span>
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-95 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
-                <p className="text-xs font-mono text-primary/80 uppercase tracking-widest mb-2 border-b border-white/10 pb-2 inline-block self-start">
-                  {galaxy.classification} Galaxy
-                </p>
-                <h3 className="font-headline text-3xl font-bold mb-3">{galaxy.name}</h3>
-                <p className="text-sm text-on-surface-variant font-light italic opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
-                  {galaxy.funFact}
-                </p>
+              <div className="absolute bottom-0 left-0 w-full p-8">
+                <div className="transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-10 lg:group-hover:-translate-y-12 relative z-10">
+                  <p className="text-xs font-mono text-primary/80 uppercase tracking-widest mb-2 border-b border-white/10 pb-2 inline-block self-start">
+                    {galaxy.classification} Galaxy
+                  </p>
+                  <h3 className="font-headline text-3xl font-bold">{galaxy.name}</h3>
+                </div>
+                <div className="absolute left-8 right-8 bottom-8 pointer-events-none">
+                  <p className="text-sm text-on-surface-variant font-light italic opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] lg:pr-4 line-clamp-2">
+                    {galaxy.funFact}
+                  </p>
+                </div>
               </div>
             </div>
           ))}

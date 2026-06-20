@@ -87,7 +87,7 @@ export function Modal({ item, onClose }) {
                 <img
                   src={imageUrl}
                   alt={item.name}
-                  className="w-full my-auto object-cover max-h-full"
+                  className={category === 'Planetary Node' ? "w-full my-auto object-cover max-h-full" : "w-full h-full object-cover"}
                 />
               </div>
 
