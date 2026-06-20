@@ -1,56 +1,6 @@
 import { SectionHeader } from '../ui/SectionHeader'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
-
-const astronauts = [
-  {
-    id: 'a1',
-    name: 'Neil Armstrong',
-    role: 'Apollo 11 Commander',
-    country: 'USA',
-    description: 'First person to walk on the Moon.',
-    image: '/astronauts/Neil_Armstrong.jpg',
-  },
-  {
-    id: 'a2',
-    name: 'Kalpana Chawla',
-    role: 'Mission Specialist',
-    country: 'India',
-    description: 'First woman of Indian origin in space.',
-    image: '/astronauts/Kalpana_Chawla.jpg',
-  },
-  {
-    id: 'a3',
-    name: 'Sunita Williams',
-    role: 'Station Commander',
-    country: 'USA',
-    description: 'Record holder for spacewalks by a woman.',
-    image: '/astronauts/Sunita_Williams.jpg',
-  },
-  {
-    id: 'a4',
-    name: 'Yuri Gagarin',
-    role: 'Vostok 1 Pilot',
-    country: 'USSR',
-    description: 'First human to journey into outer space.',
-    image: '/astronauts/Yuri_Gagarin.jpg',
-  },
-  {
-    id: 'a5',
-    name: 'Sally Ride',
-    role: 'Mission Specialist',
-    country: 'USA',
-    description: 'First American woman in space.',
-    image: '/astronauts/Sally_Ride.jpg',
-  },
-  {
-    id: 'a6',
-    name: 'Rakesh Sharma',
-    role: 'Soyuz T-11 Cosmonaut',
-    country: 'India',
-    description: 'First Indian citizen to travel in space.',
-    image: '/astronauts/Rakesh_Sharma.jpg',
-  },
-]
+import { astronautData } from '../../data/astronautData'
 
 export function Astronauts({ onSelect }) {
   const { headingRef, gridRef } = useScrollReveal()
@@ -60,12 +10,12 @@ export function Astronauts({ onSelect }) {
 
         {/* Header */}
         <SectionHeader ref={headingRef} title="Personnel" highlight="Log">
-          Total: {String(astronauts.length).padStart(2, '0')} Crew Members
+          Total: {String(astronautData.length).padStart(2, '0')} Crew Members
         </SectionHeader>
 
         {/* Grid */}
         <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {astronauts.map((astronaut, i) => (
+          {astronautData.map((astronaut, i) => (
             <div
               key={astronaut.id}
               onClick={() => onSelect(astronaut)}
