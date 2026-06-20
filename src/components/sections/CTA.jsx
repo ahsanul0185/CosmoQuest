@@ -1,5 +1,6 @@
 
 
+import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 export function CTA() {
@@ -24,12 +25,12 @@ export function CTA() {
             The cosmos is vast and full of wonders. Start your journey through the stars and discover the unknown.
           </p>
           
-          <a
-            href="#categories"
+          <Link
+            to="/explore"
             className="group relative inline-flex items-center justify-center px-10 py-5 bg-background text-primary font-body text-xs sm:text-sm font-bold uppercase tracking-[0.2em] rounded-full hover:bg-surface-bright transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 overflow-hidden"
           >
             <span className="relative z-10 text-glow-subtle">Start Exploring</span>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

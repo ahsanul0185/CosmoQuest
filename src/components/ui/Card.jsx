@@ -1,4 +1,6 @@
-import { motion } from 'motion/react'
+import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 const categoryColors = {
   planets: 'text-primary',
@@ -16,21 +18,21 @@ const categoryLabels = {
   facts: 'Cosmic Fact',
 }
 
-export function Card({ item, onClick, index = 0 }) {
+export function Card({ item, onClick }) {
   const categoryLabel = categoryLabels[item.category] || 'Database Record'
   const accentColor = categoryColors[item.category] || 'text-primary'
 
   return (
     <div
       onClick={() => onClick(item)}
-      className="group cursor-pointer bg-background border border-outline rounded-xl overflow-hidden hover:border-primary/60 hover:bg-surface/40"
+      className="group cursor-pointer bg-background border border-outline rounded-xl overflow-hidden hover:bg-surface transition-colors"
     >
       {/* Image */}
       <div className="aspect-[4/3] overflow-hidden relative">
         <img
           src={item.image}
           alt={item.searchName || item.name}
-          className="w-full h-full object-cover scale-105"
+          className="w-full h-full object-cover scale-110 group-hover:scale-100 grayscale group-hover:grayscale-0 transition-all duration-700 will-change-transform"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -43,7 +45,7 @@ export function Card({ item, onClick, index = 0 }) {
 
       {/* Content */}
       <div className="p-4 sm:p-5">
-        <h3 className="font-headline text-lg sm:text-xl font-bold text-star-white mb-2">
+        <h3 className="font-headline text-lg sm:text-xl font-bold text-star-white mb-2 group-hover:text-primary transition-colors">
           {item.searchName || item.name}
         </h3>
         

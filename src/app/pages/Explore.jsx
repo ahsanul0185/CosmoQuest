@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { SearchBar } from '../../components/ui/SearchBar'
@@ -8,9 +8,11 @@ import { Modal } from '../../components/ui/Modal'
 import { spaceData, categories } from '../../data/spaceData'
 import { useFilteredData } from '../../hooks/useFilteredData'
 import { useLenis } from '../../hooks/useLenis'
+import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 export function Explore() {
   useLenis()
+  const { gridRef } = useScrollReveal()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
@@ -46,7 +48,6 @@ export function Explore() {
   }
 
   const filteredData = useFilteredData(spaceData, searchQuery, activeCategory)
-  const gridRef = useRef(null)
 
   const resultsCount = filteredData.length
   const totalCount = spaceData.length
@@ -133,12 +134,11 @@ export function Explore() {
           {/* Results Grid */}
           {resultsCount > 0 ? (
             <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {filteredData.map((item, index) => (
+              {filteredData.map((item) => (
                 <Card
                   key={item.id}
                   item={item}
                   onClick={setSelectedItem}
-                  index={index}
                 />
               ))}
             </div>
