@@ -75,7 +75,7 @@ export function useScrollReveal(options = { mode: 'stagger', scale: false }) {
     })
 
     return () => ctx.revert()
-  }, [options?.mode, options?.scale])
+  }, [options?.mode, options?.scale, options?.key])
 
   return { headingRef, gridRef }
 }

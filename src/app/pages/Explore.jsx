@@ -12,7 +12,6 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 export function Explore() {
   useLenis()
-  const { gridRef } = useScrollReveal({ mode: 'individual', scale: true })
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
@@ -48,6 +47,10 @@ export function Explore() {
   }
 
   const filteredData = useFilteredData(spaceData, searchQuery, activeCategory)
+
+  // Create a key that changes whenever search/filter changes to re-trigger animations
+  const animationKey = `${searchQuery}-${activeCategory}`
+  const { gridRef } = useScrollReveal({ mode: 'individual', scale: true, key: animationKey })
 
   const resultsCount = filteredData.length
   const totalCount = spaceData.length

@@ -21,7 +21,7 @@ export function Card({ item, onClick }) {
   return (
     <div
       onClick={() => onClick(item)}
-      className="group cursor-pointer bg-background border border-outline rounded-xl overflow-hidden hover:bg-surface transition-colors"
+      className="group cursor-pointer bg-background border border-outline overflow-hidden hover:bg-surface transition-colors"
     >
       {/* Image */}
       <div className="aspect-[4/3] overflow-hidden relative">
