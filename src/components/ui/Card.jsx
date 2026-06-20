@@ -1,7 +1,3 @@
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
 const categoryColors = {
   planets: 'text-primary',
   astronauts: 'text-secondary',
