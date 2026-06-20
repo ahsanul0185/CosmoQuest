@@ -9,12 +9,12 @@ export function Galaxies({ onSelect }) {
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
         <SectionHeader ref={headingRef} title="Deep" highlight="Space" />
 
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {galaxyData.map((galaxy) => (
             <div
               key={galaxy.id}
               onClick={() => onSelect(galaxy)}
-              className="relative group cursor-pointer overflow-hidden aspect-[4/5] bg-surface"
+              className="relative group cursor-pointer overflow-hidden aspect-[16/9] md:aspect-[2/1] bg-surface"
             >
               <img
                 src={galaxy.image}

@@ -1,7 +1,8 @@
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
 import { Footer } from '../../components/sections/Footer'
+import { HeaderSearch } from '../../components/ui/HeaderSearch'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -14,7 +15,6 @@ const navItems = [
 
 export function MainLayout() {
   useLenis()
-  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-background text-on-surface font-body">
       <motion.header
@@ -47,27 +47,7 @@ export function MainLayout() {
             ))}
           </div>
 
-          <button
-            type="button"
-            aria-label="Search"
-            onClick={() => navigate('/explore')}
-            className="text-on-surface-variant hover:text-primary transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-          </button>
+          <HeaderSearch />
         </nav>
       </motion.header>
 
