@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export function useScrollReveal(options = { mode: 'stagger' }) {
+export function useScrollReveal(options = { mode: 'stagger', scale: false }) {
   const headingRef = useRef(null)
   const gridRef = useRef(null)
 
@@ -26,16 +26,21 @@ export function useScrollReveal(options = { mode: 'stagger' }) {
       }
 
       const mode = options?.mode || 'stagger'
+      const scale = options?.scale || false
 
       if (gridRef.current && gridRef.current.children.length > 0) {
         if (mode === 'individual') {
           // Children reveal individually as they scroll into view
           const cards = Array.from(gridRef.current.children)
           cards.forEach((card) => {
-            gsap.set(card, { opacity: 0, y: 80 })
+            const fromVars = scale
+              ? { opacity: 0, y: 80, scale: 0.9 }
+              : { opacity: 0, y: 80 }
+            gsap.set(card, fromVars)
             gsap.to(card, {
               opacity: 1,
               y: 0,
+              scale: 1,
               duration: 1,
               ease: 'power2.out',
               clearProps: 'willChange',
@@ -48,10 +53,14 @@ export function useScrollReveal(options = { mode: 'stagger' }) {
         } else {
           // Children stagger in
           const cards = gridRef.current.children
-          gsap.set(cards, { opacity: 0, y: 80 })
+          const fromVars = scale
+            ? { opacity: 0, y: 80, scale: 0.9 }
+            : { opacity: 0, y: 80 }
+          gsap.set(cards, fromVars)
           gsap.to(cards, {
             opacity: 1,
             y: 0,
+            scale: 1,
             duration: 1,
             stagger: 0.13,
             ease: 'power2.out',
@@ -66,7 +75,7 @@ export function useScrollReveal(options = { mode: 'stagger' }) {
     })
 
     return () => ctx.revert()
-  }, [options?.mode])
+  }, [options?.mode, options?.scale])
 
   return { headingRef, gridRef }
 }

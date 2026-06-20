@@ -12,7 +12,7 @@ import { useScrollReveal } from '../../hooks/useScrollReveal'
 
 export function Explore() {
   useLenis()
-  const { gridRef } = useScrollReveal({ mode: 'individual' })
+  const { gridRef } = useScrollReveal({ mode: 'individual', scale: true })
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
