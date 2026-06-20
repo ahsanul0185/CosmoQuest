@@ -50,7 +50,7 @@ export function MainLayout() {
           <button
             type="button"
             aria-label="Search"
-            onClick={() => navigate('/search')}
+            onClick={() => navigate('/explore')}
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             <svg

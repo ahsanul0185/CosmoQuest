@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { SearchBar } from '../../components/ui/SearchBar'
@@ -9,7 +9,7 @@ import { spaceData, categories } from '../../data/spaceData'
 import { useFilteredData } from '../../hooks/useFilteredData'
 import { useLenis } from '../../hooks/useLenis'
 
-export function Search() {
+export function Explore() {
   useLenis()
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -46,6 +46,7 @@ export function Search() {
   }
 
   const filteredData = useFilteredData(spaceData, searchQuery, activeCategory)
+  const gridRef = useRef(null)
 
   const resultsCount = filteredData.length
   const totalCount = spaceData.length
@@ -131,7 +132,7 @@ export function Search() {
 
           {/* Results Grid */}
           {resultsCount > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {filteredData.map((item, index) => (
                 <Card
                   key={item.id}

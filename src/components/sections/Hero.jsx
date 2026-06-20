@@ -100,7 +100,7 @@ export function Hero() {
   }, [])
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/search?category=${categoryId}`)
+    navigate(`/explore?category=${categoryId}`)
   }
 
   return (

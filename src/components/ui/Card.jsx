@@ -21,19 +21,16 @@ export function Card({ item, onClick, index = 0 }) {
   const accentColor = categoryColors[item.category] || 'text-primary'
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+    <div
       onClick={() => onClick(item)}
-      className="group cursor-pointer bg-background border border-outline rounded-xl overflow-hidden hover:border-primary/60 hover:bg-surface/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10"
+      className="group cursor-pointer bg-background border border-outline rounded-xl overflow-hidden hover:border-primary/60 hover:bg-surface/40"
     >
       {/* Image */}
       <div className="aspect-[4/3] overflow-hidden relative">
         <img
           src={item.image}
           alt={item.searchName || item.name}
-          className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700 will-change-transform"
+          className="w-full h-full object-cover scale-105"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
@@ -46,7 +43,7 @@ export function Card({ item, onClick, index = 0 }) {
 
       {/* Content */}
       <div className="p-4 sm:p-5">
-        <h3 className="font-headline text-lg sm:text-xl font-bold text-star-white group-hover:text-primary transition-colors mb-2">
+        <h3 className="font-headline text-lg sm:text-xl font-bold text-star-white mb-2">
           {item.searchName || item.name}
         </h3>
         
@@ -88,6 +85,6 @@ export function Card({ item, onClick, index = 0 }) {
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
