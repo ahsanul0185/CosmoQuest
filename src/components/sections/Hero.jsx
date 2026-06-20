@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import { StarsBackground } from '../ui/star'
 import planetIcon from '../../assets/planet-svgrepo-com.svg'
@@ -8,11 +9,11 @@ import galaxyIcon from '../../assets/warp-galaxy-svgrepo-com.svg'
 import starIcon from '../../assets/star-svgrepo-com.svg'
 
 const categories = [
-  { name: 'Planets', count: '8 Planets', icon: 'planet' },
-  { name: 'Astronauts', count: '6+ Astronauts', icon: 'astronaut' },
-  { name: 'Missions', count: '6+ Missions', icon: 'rocket' },
-  { name: 'Galaxies', count: '4+ Galaxies', icon: 'galaxy' },
-  { name: 'Facts', count: '8+ Facts', icon: 'fact' },
+  { name: 'Planets', count: '8 Planets', icon: 'planet', categoryId: 'planets' },
+  { name: 'Astronauts', count: '6+ Astronauts', icon: 'astronaut', categoryId: 'astronauts' },
+  { name: 'Missions', count: '6+ Missions', icon: 'rocket', categoryId: 'missions' },
+  { name: 'Galaxies', count: '4+ Galaxies', icon: 'galaxy', categoryId: 'galaxies' },
+  { name: 'Facts', count: '8+ Facts', icon: 'fact', categoryId: 'facts' },
 ]
 
 export function Hero() {
@@ -20,6 +21,7 @@ export function Hero() {
   const cardsRef = useRef(null)
   const starsRef = useRef(null)
   const [animPaused, setAnimPaused] = useState(false)
+  const navigate = useNavigate()
 
   // Individual text element refs
   const badgeRef = useRef(null)
@@ -97,6 +99,10 @@ export function Hero() {
     return () => ctx.revert()
   }, [])
 
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/search?category=${categoryId}`)
+  }
+
   return (
     <section ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-background">
       <div ref={starsRef} className="absolute inset-0 z-0">
@@ -156,6 +162,7 @@ export function Hero() {
             {categories.map((category) => (
               <div
                 key={category.name}
+                onClick={() => handleCategoryClick(category.categoryId)}
                 className="group cursor-pointer rounded-xl border border-outline bg-surface/60 backdrop-blur-sm p-5 hover:border-primary hover:bg-surface-bright/80 transition-[border-color,background-color] duration-300 opacity-0"
               >
                 <div className="mb-4 flex items-center justify-center">

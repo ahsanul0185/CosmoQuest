@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 export function Modal({ item, onClose }) {
   // Determine Category safely
   let category = item?.category || 'Database Record'
-  if (!item?.category) {
+  if (!item?.category || item.category === 'facts') {
     if (item?.moons !== undefined) category = 'Planetary Node'
     if (item?.country !== undefined) category = 'Personnel Record'
     if (item?.progress !== undefined) category = 'Mission Protocol'

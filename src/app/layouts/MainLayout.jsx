@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
 import { Footer } from '../../components/sections/Footer'
@@ -14,6 +14,7 @@ const navItems = [
 
 export function MainLayout() {
   useLenis()
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-background text-on-surface font-body">
       <motion.header
@@ -49,6 +50,7 @@ export function MainLayout() {
           <button
             type="button"
             aria-label="Search"
+            onClick={() => navigate('/search')}
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             <svg
