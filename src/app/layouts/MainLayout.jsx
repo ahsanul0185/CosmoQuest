@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useLenis } from '../../hooks/useLenis'
 import { Footer } from '../../components/sections/Footer'
@@ -16,6 +16,30 @@ const navItems = [
 
 export function MainLayout() {
   useLenis()
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const scrollToSection = (hash) => {
+    const element = document.querySelector(hash)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
+  const handleNavClick = (to) => {
+    const [path, hash] = to.split('#')
+    if (hash) {
+      if (location.pathname === '/' || location.pathname === path) {
+        scrollToSection(`#${hash}`)
+      } else {
+        navigate(path || '/')
+        setTimeout(() => scrollToSection(`#${hash}`), 300)
+      }
+    } else {
+      navigate(to)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background text-on-surface font-body">
       <motion.header
@@ -34,17 +58,13 @@ export function MainLayout() {
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <NavLink
+              <button
                 key={item.label}
-                to={item.to}
-                className={({ isActive }) =>
-                  `text-sm font-medium transition-colors duration-300 ${
-                    isActive ? 'text-primary' : 'text-on-surface-variant hover:text-on-surface'
-                  }`
-                }
+                onClick={() => handleNavClick(item.to)}
+                className="text-sm font-medium transition-colors duration-300 text-on-surface-variant hover:text-on-surface"
               >
                 {item.label}
-              </NavLink>
+              </button>
             ))}
           </div>
 
