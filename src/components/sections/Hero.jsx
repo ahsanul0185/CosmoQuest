@@ -65,7 +65,7 @@ export function Hero() {
       const tl = gsap.timeline({ delay: 0.1, defaults: { ease: 'power3.out' } })
 
       // Stars fade in independently — very slow, still going after text finishes
-      gsap.to(starsRef.current, { opacity: 1, duration: 4, ease: 'power1.inOut', delay: 0.1 })
+      gsap.to(starsRef.current, { opacity: 1, duration: 2, ease: 'power1.inOut', delay: 1 })
 
       // Each text element slides in one after another
       tl.to(els, {

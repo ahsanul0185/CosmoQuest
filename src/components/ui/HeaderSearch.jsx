@@ -12,10 +12,13 @@ export function HeaderSearch() {
   // Don't show on explore page
   const isExplorePage = location.pathname === '/explore'
 
-  // Focus input when opened
+  // Focus input when opened — delay matches the animation duration (0.3s)
   useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus()
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        inputRef.current?.focus()
+      }, 320)
+      return () => clearTimeout(timer)
     }
   }, [isOpen])
 

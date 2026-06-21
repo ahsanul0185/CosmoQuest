@@ -41,7 +41,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <p className="text-[9px] font-mono text-primary uppercase tracking-[0.25em] mb-5">
+            <p className="text-[10px] font-mono text-primary uppercase tracking-[0.25em] mb-5">
               Navigation
             </p>
             <ul className="space-y-3">
@@ -60,7 +60,7 @@ export function Footer() {
 
           {/* Explore */}
           <div>
-            <p className="text-[9px] font-mono text-primary uppercase tracking-[0.25em] mb-5">
+            <p className="text-[10px] font-mono text-primary uppercase tracking-[0.25em] mb-5">
               Explore
             </p>
             <ul className="space-y-3">
@@ -81,12 +81,9 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-outline py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-mono text-on-surface-variant/60">
+        <div className="border-t border-outline py-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <p className="text-base font-headline text-on-surface-variant/60">
             © {currentYear} CosmoQuest. All rights reserved.
-          </p>
-          <p className="text-[10px] font-mono text-on-surface-variant/40 uppercase tracking-widest">
-            Coordinates: 00°00′00″N 00°00′00″E // Deep Space
           </p>
         </div>
 

@@ -4,6 +4,7 @@ import { useLenis } from '../../hooks/useLenis'
 import { Footer } from '../../components/sections/Footer'
 import { HeaderSearch } from '../../components/ui/HeaderSearch'
 import { MobileMenu } from '../../components/ui/MobileMenu'
+import { ScrollToTopButton } from '../../components/ui/ScrollToTopButton'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -81,6 +82,7 @@ export function MainLayout() {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </div>
   )
 }
