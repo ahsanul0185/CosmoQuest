@@ -46,7 +46,7 @@ export function useScrollReveal(options = { mode: 'stagger', scale: false }) {
               clearProps: 'willChange',
               scrollTrigger: {
                 trigger: card,
-                start: 'top 85%',
+                start: 'top 100%',
               },
             })
           })

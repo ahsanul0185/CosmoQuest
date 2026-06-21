@@ -133,12 +133,12 @@ export function Hero() {
           </p>
 
           <div ref={ctaRef} className="opacity-0">
-            <a
-              href="#categories"
-              className="inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full hover:bg-primary-dim transition-[background-color] duration-300 accent-glow-strong hover:scale-105 active:scale-95"
+            <button
+              onClick={() => navigate('/explore')}
+              className="relative inline-flex items-center justify-center px-10 py-4 bg-primary text-on-primary font-body text-sm font-bold uppercase tracking-[0.15em] rounded-full transition-all duration-300 hover:bg-primary-dim hover:shadow-[0_0_32px_8px_rgba(99,102,241,0.45)] active:brightness-90"
             >
               Start Exploring
-            </a>
+            </button>
           </div>
 
         </div>

@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 const navLinks = [
   { label: 'Planets', href: '/#planets' },
   { label: 'Astronauts', href: '/#astronauts' },
@@ -6,9 +8,20 @@ const navLinks = [
   { label: 'Facts', href: '/#facts' },
 ]
 
+const exploreLinks = [
+  { id: 'all', label: 'All Objects' },
+  { id: 'planets', label: 'Planets' },
+  { id: 'astronauts', label: 'Astronauts' },
+  { id: 'missions', label: 'Missions' },
+  { id: 'galaxies', label: 'Galaxies' },
+  { id: 'facts', label: 'Facts' },
+]
+
 const currentYear = new Date().getFullYear()
 
 export function Footer() {
+  const navigate = useNavigate()
+
   return (
     <footer className="border-t border-outline">
       <div className="max-w-[1200px] mx-auto px-6 lg:px-10">
@@ -45,23 +58,22 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Mission status */}
+          {/* Explore */}
           <div>
             <p className="text-[9px] font-mono text-primary uppercase tracking-[0.25em] mb-5">
-              System Status
+              Explore
             </p>
             <ul className="space-y-3">
-              {[
-                { label: 'Data Feed', status: 'Online' },
-                { label: 'Telemetry', status: 'Active' },
-                { label: 'Deep Space Link', status: 'Nominal' },
-              ].map((item) => (
-                <li key={item.label} className="flex items-center justify-between max-w-[200px]">
-                  <span className="text-xs text-on-surface-variant">{item.label}</span>
-                  <span className="flex items-center gap-1.5 text-[10px] font-mono text-primary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    {item.status}
-                  </span>
+              {exploreLinks.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() =>
+                      navigate(link.id === 'all' ? '/explore' : `/explore?category=${link.id}`)
+                    }
+                    className="text-sm text-on-surface-variant hover:text-on-surface transition-colors text-left"
+                  >
+                    {link.label}
+                  </button>
                 </li>
               ))}
             </ul>

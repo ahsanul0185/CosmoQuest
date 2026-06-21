@@ -27,7 +27,7 @@ export function CTA() {
           
           <Link
             to="/explore"
-            className="group relative inline-flex items-center justify-center px-10 py-5 bg-background text-primary font-body text-xs sm:text-sm font-bold uppercase tracking-[0.2em] rounded-full hover:bg-surface-bright transition-all duration-300 shadow-2xl hover:scale-105 active:scale-95 overflow-hidden"
+            className="group relative inline-flex items-center justify-center px-10 py-5 bg-background text-primary font-body text-xs sm:text-sm font-bold uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow-2xl hover:bg-surface-bright hover:shadow-[0_0_40px_10px_rgba(99,102,241,0.35)] active:brightness-90 overflow-hidden"
           >
             <span className="relative z-10 text-glow-subtle">Start Exploring</span>
           </Link>
